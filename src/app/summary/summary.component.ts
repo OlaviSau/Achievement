@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {Observable} from 'rxjs';
+import {Category} from '../models/category';
+import {Store} from '@ngrx/store';
+import {AppState} from '../app.state';
 
 @Component({
   selector: 'ad-summary',
@@ -7,38 +11,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SummaryComponent implements OnInit {
 
-  categories = [
-    {
-      name: 'Literature',
-      key: 'literature'
-    },
-    {
-      name: 'Travel',
-      key: 'travel'
-    },
-    {
-      name: 'Travel',
-      key: 'travel'
-    },
-    {
-      name: 'Travel',
-      key: 'travel'
-    },
-    {
-      name: 'Travel',
-      key: 'travel'
-    },
-    {
-      name: 'Travel',
-      key: 'travel'
-    },
-    {
-      name: 'Travel',
-      key: 'travel'
-    },
-  ];
+  categories: Observable<Category[]>;
 
-  constructor() { }
+  constructor(private store: Store<AppState>) {
+    this.categories = store.select('categories');
+  }
 
   ngOnInit() {
   }

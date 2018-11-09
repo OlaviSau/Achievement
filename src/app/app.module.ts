@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { SummaryComponent } from './summary/summary.component';
 import { CategoryComponent } from './category/category.component';
 import { MatProgressBarModule} from '@angular/material';
+import {StoreModule} from '@ngrx/store';
+import {categoriesReducer} from './reducers/categoriesReducer';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { MatProgressBarModule} from '@angular/material';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    StoreModule.forRoot({ categories: categoriesReducer })
   ],
   providers: [],
   bootstrap: [AppComponent]
