@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SummaryComponent } from './summary/summary.component';
 import { CategoryComponent } from './category/category.component';
+import { MatProgressBarModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { CategoryComponent } from './category/category.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
