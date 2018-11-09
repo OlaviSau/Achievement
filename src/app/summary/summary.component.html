@@ -2,3 +2,11 @@
   <h1>TOTAL</h1>
   <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
 </div>
+
+<div class="categories">
+  <div *ngFor="let category of categories" class="category">
+    <h2>{{category.name}}</h2>
+    <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+  </div>
+</div>
+

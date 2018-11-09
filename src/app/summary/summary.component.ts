@@ -7,6 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SummaryComponent implements OnInit {
 
+  categories = [
+    {
+      name: 'Literature'
+    },
+    {
+      name: 'Travel'
+    }
+  ];
+
   constructor() { }
 
   ngOnInit() {
