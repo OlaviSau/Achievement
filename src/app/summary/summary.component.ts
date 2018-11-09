@@ -9,11 +9,33 @@ export class SummaryComponent implements OnInit {
 
   categories = [
     {
-      name: 'Literature'
+      name: 'Literature',
+      key: 'literature'
     },
     {
-      name: 'Travel'
-    }
+      name: 'Travel',
+      key: 'travel'
+    },
+    {
+      name: 'Travel',
+      key: 'travel'
+    },
+    {
+      name: 'Travel',
+      key: 'travel'
+    },
+    {
+      name: 'Travel',
+      key: 'travel'
+    },
+    {
+      name: 'Travel',
+      key: 'travel'
+    },
+    {
+      name: 'Travel',
+      key: 'travel'
+    },
   ];
 
   constructor() { }
