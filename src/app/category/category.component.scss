@@ -1,0 +1,33 @@
+ad-category {
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 100px;
+  display: block;
+  text-align: center;
+  padding: 0 20px;
+
+  .total-progress-bar {
+    width: 40%;
+    margin: 0 auto;
+  }
+
+  .categories {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .category {
+      flex-basis: 25%;
+      padding: 0 20px 20px 20px;
+      box-sizing: border-box;
+      &:hover {
+        background: rgba(0,0,0,.03);
+        cursor: pointer;
+      }
+    }
+
+  }
+
+
+}
