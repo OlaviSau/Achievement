@@ -11,16 +11,10 @@ ad-category {
     margin: 0 auto;
   }
 
-  .categories {
+  .achievements {
     padding-top: 50px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
 
-    .category {
-      flex-basis: 25%;
-      padding: 0 20px 20px 20px;
-      box-sizing: border-box;
+    .achievement {
       &:hover {
         background: rgba(0,0,0,.03);
         cursor: pointer;
