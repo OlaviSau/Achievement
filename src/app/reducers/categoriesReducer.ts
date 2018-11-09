@@ -3,7 +3,7 @@ import {Category} from '../models/category';
 
 /* tslint:disable:max-line-length */
 const initialState: Category[] = [
-  {
+  new Category({
     id: 1,
     name: 'Literature',
     key: 'literature',
@@ -36,13 +36,13 @@ const initialState: Category[] = [
         description: 'Read Code Complete cover to cover.'
       }
     ]
-  },
-  {
+  }),
+  new Category({
     id: 2,
     name: 'Travel',
     key: 'travel',
     achievements: []
-  }
+  })
 ];
 /* tslint:enable:max-line-length */
 

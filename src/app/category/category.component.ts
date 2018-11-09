@@ -21,12 +21,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
     return achievements.sort((l: Achievement, r: Achievement) => l.completed ? -1 : 1 );
   }
 
-  completionPercent(category: Category) {
-    const sumPoints = (total, achievement) => total + achievement.points;
-    const completed: Achievement[] = category.achievements.filter(achievement => achievement.completed);
-    return (completed.reduce(sumPoints, 0) / category.achievements.reduce(sumPoints, 0)) * 100;
-  }
-
   ngOnInit() {
     this.routeSubscription = this.route.params.subscribe((params: { key: string }) =>
       this.store.select('categories').subscribe(
