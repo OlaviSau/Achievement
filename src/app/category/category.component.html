@@ -4,7 +4,10 @@
 </div>
 
 <div class="achievements">
-  <div class="achievement">
-
+  <div *ngFor="let achievement of category.achievements" class="achievement" [class.completed]="achievement.completed">
+    <img class="achievement-image" src="assets/images/achievements/{{achievement.img}}" alt="achievement-image">
+    <h2 class="achievement-title">{{achievement.title}}</h2>
+    <p class="achievement-description">{{achievement.description}}</p>
+    <div class="achievement-points">{{achievement.points}}</div>
   </div>
 </div>

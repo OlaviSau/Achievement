@@ -15,9 +15,41 @@ ad-category {
     padding-top: 50px;
 
     .achievement {
+      padding: 25px;
+      text-align: left;
+      height: 140px;
+      box-sizing: border-box;
+      position: relative;
+
+      color: rgba(0,0,0,.5);
+      &.completed {
+        color: #673ab7;
+      }
+
+      .achievement-image {
+        height: 90px;
+        width: 160px;
+        float: left;
+        margin-right: 25px;
+      }
+      .achievement-title {
+        display: inline-block;
+        margin: 0;
+      }
+
+      .achievement-points {
+        top: calc(50% - 31.5px);
+        right: 25px;
+        position: absolute;
+        font-size: 50px;
+
+
+
+
+      }
+
       &:hover {
         background: rgba(0,0,0,.03);
-        cursor: pointer;
       }
     }
 
