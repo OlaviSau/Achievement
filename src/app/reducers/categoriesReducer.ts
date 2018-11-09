@@ -25,6 +25,15 @@ const initialState: Category[] = [
         points: 10,
         completed: false,
         description: 'Read Introduction to Algorithms cover to cover.'
+      },
+      {
+        id: 3,
+        key: 'code-complete',
+        title: 'Code Complete',
+        img: 'code-complete.png',
+        points: 10,
+        completed: true,
+        description: 'Read Code Complete cover to cover.'
       }
     ]
   },
@@ -33,37 +42,7 @@ const initialState: Category[] = [
     name: 'Travel',
     key: 'travel',
     achievements: []
-  },
-  {
-    id: 3,
-    name: 'Travel',
-    key: 'travel',
-    achievements: []
-  },
-  {
-    id: 4,
-    name: 'Travel',
-    key: 'travel',
-    achievements: []
-  },
-  {
-    id: 5,
-    name: 'Travel',
-    key: 'travel',
-    achievements: []
-  },
-  {
-    id: 6,
-    name: 'Travel',
-    key: 'travel',
-    achievements: []
-  },
-  {
-    id: 7,
-    name: 'Travel',
-    key: 'travel',
-    achievements: []
-  },
+  }
 ];
 /* tslint:enable:max-line-length */
 

@@ -1,10 +1,10 @@
 <div>
-  <h1>{{category.name}}</h1>
-  <mat-progress-bar mode="determinate" value="40" class="total-progress-bar"></mat-progress-bar>
+  <h1 class="category-name">{{category.name}}</h1>
+  <mat-progress-bar mode="determinate" value="{{completionPercent(category)}}" class="total-progress-bar"></mat-progress-bar>
 </div>
 
 <div class="achievements">
-  <div *ngFor="let achievement of category.achievements" class="achievement" [class.completed]="achievement.completed">
+  <div *ngFor="let achievement of sortByCompletion(category.achievements)" class="achievement" [class.completed]="achievement.completed">
     <img class="achievement-image" src="assets/images/achievements/{{achievement.img}}" alt="achievement-image">
     <h2 class="achievement-title">{{achievement.title}}</h2>
     <p class="achievement-description">{{achievement.description}}</p>
