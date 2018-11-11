@@ -7,7 +7,7 @@ import { SummaryComponent } from './summary/summary.component';
 import { CategoryComponent } from './category/category.component';
 import { MatProgressBarModule} from '@angular/material';
 import {StoreModule} from '@ngrx/store';
-import {categoriesReducer} from './reducers/categories.reducer';
+import {categoryReducer} from './reducers/category.reducer';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {CachingInterceptor} from './http-interceptors/cache.http-interceptor';
 import {FocusOnInitDirective} from './directives/focus-on-init.directive';
@@ -24,7 +24,9 @@ import {FocusOnInitDirective} from './directives/focus-on-init.directive';
     BrowserModule,
     AppRoutingModule,
     MatProgressBarModule,
-    StoreModule.forRoot({ categories: categoriesReducer })
+    StoreModule.forRoot({
+      category: categoryReducer
+    })
   ],
   providers: [
     {

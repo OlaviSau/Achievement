@@ -7,6 +7,7 @@ import {CategoriesService} from '../services/categories.service';
 import {SetCategoriesAction} from '../actions/set-categories.action';
 import {map} from 'rxjs/operators';
 import {CreateCategoryAction} from '../actions/create-category.action';
+import {UpdateCategoryAction} from '../actions/update-category.action';
 
 @Component({
   selector: 'ad-summary',
@@ -16,13 +17,19 @@ import {CreateCategoryAction} from '../actions/create-category.action';
 export class SummaryComponent implements OnInit {
 
   categories: Observable<CategoryModel[]>;
-  isCategoryBeingCreated: Observable<boolean>;
+  categoryBeingCreated: Observable<CategoryModel>;
 
   constructor(private store: Store<AppState>, private categoriesService: CategoriesService) {
-    this.categories = store.select('categories');
-    this.isCategoryBeingCreated = store.select('category-creation').pipe(
-      map(categoryCreation => categoryCreation.isCategoryBeingCreated)
+    this.categories = store.select('category').pipe(
+      map(categoryStore => categoryStore.list)
     );
+    this.categoryBeingCreated = store.select('category').pipe(
+      map(categoryCreation => categoryCreation.categoryBeingCreated)
+    );
+  }
+
+  updateCategory(name, id) {
+    this.store.dispatch(new UpdateCategoryAction(name, id));
   }
 
   createCategory() {

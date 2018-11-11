@@ -1,7 +1,7 @@
 import {AchievementModel} from './achievement.model';
 
 export class CategoryModel {
-  constructor(properties) {
+  constructor(properties = {}) {
     Object.assign(this, properties);
   }
 

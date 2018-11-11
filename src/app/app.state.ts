@@ -1,5 +1,8 @@
 import { CategoryModel } from './models/category.model';
 
 export interface AppState {
-  readonly categories: CategoryModel[];
+  readonly category: {
+    categoryBeingCreated: CategoryModel;
+    list: CategoryModel[];
+  };
 }
