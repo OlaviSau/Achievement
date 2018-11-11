@@ -1,11 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Observable, Subscription} from 'rxjs';
-import {Category} from '../models/category';
+import {Component, OnInit} from '@angular/core';
+import {Observable} from 'rxjs';
+import {CategoryModel} from '../models/category.model';
 import {Store} from '@ngrx/store';
 import {AppState} from '../app.state';
 import {CategoriesService} from '../services/categories.service';
-import {SetCategories} from '../actions/set-categories';
+import {SetCategoriesAction} from '../actions/set-categories.action';
 import {map} from 'rxjs/operators';
+import {CreateCategoryAction} from '../actions/create-category.action';
 
 @Component({
   selector: 'ad-summary',
@@ -14,15 +15,18 @@ import {map} from 'rxjs/operators';
 })
 export class SummaryComponent implements OnInit {
 
-  categories: Observable<Category[]>;
-  private category: Category;
+  categories: Observable<CategoryModel[]>;
+  isCategoryBeingCreated: Observable<boolean>;
 
   constructor(private store: Store<AppState>, private categoriesService: CategoriesService) {
     this.categories = store.select('categories');
+    this.isCategoryBeingCreated = store.select('category-creation').pipe(
+      map(categoryCreation => categoryCreation.isCategoryBeingCreated)
+    );
   }
 
   createCategory() {
-    this.category = new Category({});
+    this.store.dispatch(new CreateCategoryAction());
   }
 
   private completionPercent(): Observable<number> {
@@ -40,7 +44,7 @@ export class SummaryComponent implements OnInit {
 
   ngOnInit() {
     this.categoriesService.getCategories().then(
-      categories => this.store.dispatch(new SetCategories(categories))
+      categories => this.store.dispatch(new SetCategoriesAction(categories))
     );
   }
 

@@ -10,8 +10,8 @@
   </div>
   <div class="category create" [class.creating]="category" (click)="createCategory()">
     <i  class="fa fa-plus"></i>
-    <h2 *ngIf="category" [adFocusOnInit] contenteditable="true"></h2>
-    <mat-progress-bar *ngIf="category" mode="determinate" value="{{category.completionPercent()}}"></mat-progress-bar>
+    <h2 *ngIf="isCategoryBeingCreated | async" (keyup)="updateCategory()"  [adFocusOnInit] contenteditable="true"></h2>
+    <mat-progress-bar *ngIf="isCategoryBeingCreated | async" mode="determinate" value="{{category.completionPercent()}}"></mat-progress-bar>
   </div>
 </div>
 

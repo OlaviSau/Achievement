@@ -1,4 +1,4 @@
-export interface Achievement {
+export interface AchievementModel {
   id: number;
   key: string;
   title: string;

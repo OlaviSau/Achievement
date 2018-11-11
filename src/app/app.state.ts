@@ -1,5 +1,5 @@
-import { Category } from './models/category';
+import { CategoryModel } from './models/category.model';
 
 export interface AppState {
-  readonly categories: Category[];
+  readonly categories: CategoryModel[];
 }

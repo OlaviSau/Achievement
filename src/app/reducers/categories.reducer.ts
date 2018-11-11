@@ -1,20 +1,20 @@
 import { Action } from '@ngrx/store';
-import {Category} from '../models/category';
-import {SET_CATEGORIES, SetCategories} from '../actions/set-categories';
-import {SET_CATEGORY, SetCategory} from '../actions/set-category';
+import {CategoryModel} from '../models/category.model';
+import {SET_CATEGORIES, SetCategoriesAction} from '../actions/set-categories.action';
+import {SET_CATEGORY, SetCategoryAction} from '../actions/set-category.action';
 
 /* tslint:disable:max-line-length */
-const initialState: Category[] = [];
+const initialState: CategoryModel[] = [];
 /* tslint:enable:max-line-length */
 
 
-export function categoriesReducer(state: Category[] = initialState, action: Action) {
+export function categoriesReducer(state: CategoryModel[] = initialState, action: Action) {
   switch (action.type) {
     case SET_CATEGORY:
-      const categoryToSet = (action as SetCategory).category;
+      const categoryToSet = (action as SetCategoryAction).category;
       return state.filter(category => category.id !== categoryToSet.id).concat([categoryToSet]);
     case SET_CATEGORIES:
-      return (action as SetCategories).categories;
+      return (action as SetCategoriesAction).categories;
     default:
       return state;
   }
