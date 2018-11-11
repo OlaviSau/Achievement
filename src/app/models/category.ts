@@ -8,7 +8,7 @@ export class Category {
   id: number;
   key: string;
   name: string;
-  achievements: Achievement[];
+  achievements: Achievement[] = [];
 
   private static sumPoints(total, achievement: Achievement) {
     return total + achievement.points;

@@ -15,9 +15,14 @@ import {map} from 'rxjs/operators';
 export class SummaryComponent implements OnInit {
 
   categories: Observable<Category[]>;
+  private category: Category;
 
   constructor(private store: Store<AppState>, private categoriesService: CategoriesService) {
     this.categories = store.select('categories');
+  }
+
+  createCategory() {
+    this.category = new Category({});
   }
 
   private completionPercent(): Observable<number> {

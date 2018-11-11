@@ -8,5 +8,10 @@
     <h2>{{category.name}}</h2>
     <mat-progress-bar mode="determinate" value="{{category.completionPercent()}}"></mat-progress-bar>
   </div>
+  <div class="category create" [class.creating]="category" (click)="createCategory()">
+    <i  class="fa fa-plus"></i>
+    <h2 *ngIf="category" [adFocusOnInit] contenteditable="true"></h2>
+    <mat-progress-bar *ngIf="category" mode="determinate" value="{{category.completionPercent()}}"></mat-progress-bar>
+  </div>
 </div>
 

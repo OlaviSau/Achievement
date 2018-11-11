@@ -10,9 +10,11 @@ import {StoreModule} from '@ngrx/store';
 import {categoriesReducer} from './reducers/categories.reducer';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {CachingInterceptor} from './http-interceptors/cache.http-interceptor';
+import {FocusOnInitDirective} from './directives/focus-on-init.directive';
 
 @NgModule({
   declarations: [
+    FocusOnInitDirective,
     AppComponent,
     SummaryComponent,
     CategoryComponent
