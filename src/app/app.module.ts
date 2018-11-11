@@ -8,7 +8,8 @@ import { CategoryComponent } from './category/category.component';
 import { MatProgressBarModule} from '@angular/material';
 import {StoreModule} from '@ngrx/store';
 import {categoriesReducer} from './reducers/categories.reducer';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {CachingInterceptor} from './http-interceptors/cache.http-interceptor';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,13 @@ import {HttpClientModule} from '@angular/common/http';
     MatProgressBarModule,
     StoreModule.forRoot({ categories: categoriesReducer })
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CachingInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
