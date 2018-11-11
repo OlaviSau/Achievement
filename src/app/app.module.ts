@@ -7,7 +7,8 @@ import { SummaryComponent } from './summary/summary.component';
 import { CategoryComponent } from './category/category.component';
 import { MatProgressBarModule} from '@angular/material';
 import {StoreModule} from '@ngrx/store';
-import {categoriesReducer} from './reducers/categoriesReducer';
+import {categoriesReducer} from './reducers/categories.reducer';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {categoriesReducer} from './reducers/categoriesReducer';
     CategoryComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     MatProgressBarModule,
