@@ -14,7 +14,7 @@ import {map} from 'rxjs/operators';
 })
 export class SummaryComponent implements OnInit, OnDestroy {
 
-  httpSubscriber: Subscription;
+  private httpSubscriber: Subscription;
   categories: Observable<Category[]>;
 
   constructor(private store: Store<AppState>, private categoriesService: CategoriesService) {
