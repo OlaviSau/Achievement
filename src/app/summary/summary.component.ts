@@ -15,12 +15,14 @@ import {map} from 'rxjs/operators';
 export class SummaryComponent implements OnInit, OnDestroy {
 
   httpSubscriber: Subscription;
-  totalCompletionPercent: Observable<number>;
   categories: Observable<Category[]>;
 
   constructor(private store: Store<AppState>, private categoriesService: CategoriesService) {
     this.categories = store.select('categories');
-    this.totalCompletionPercent = this.categories.pipe(
+  }
+
+  private completionPercent(): Observable<number> {
+    return this.categories.pipe(
       map(categories => {
           const total = categories.reduce( (sum, category) => sum + category.totalPoints(), 0);
           if (!total) {
