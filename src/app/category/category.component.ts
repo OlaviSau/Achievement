@@ -6,15 +6,17 @@ import {Category} from '../models/category';
 import {Achievement} from '../models/achievement';
 import {CategoriesService} from '../services/categories.service';
 import {SetCategory} from '../actions/set-category';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'ad-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss']
 })
-export class CategoryComponent implements OnInit {
+export class CategoryComponent implements OnInit, OnDestroy {
 
   category: Category;
+  routeSubscription: Subscription;
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute, private categoriesService: CategoriesService) {}
 
@@ -23,7 +25,7 @@ export class CategoryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.toPromise().then(({key}) => {
+    this.routeSubscription = this.route.params.subscribe(({key}) => {
           this.store.select('categories').subscribe(
             categories => this.category = categories.find(category => category.key === key)
           );
@@ -32,5 +34,9 @@ export class CategoryComponent implements OnInit {
           );
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.routeSubscription.unsubscribe();
   }
 }
