@@ -16,4 +16,10 @@ export class CategoriesService {
       map(categories => categories.map( category => new Category(category)))
     );
   }
+
+  getCategory(key): Observable<Category> {
+    return this.http.get<Category>(`http://api.achievement.ee:8080/categories/${key}`).pipe(
+      map( category => new Category(category))
+    );
+  }
 }
