@@ -12,9 +12,8 @@ import {map} from 'rxjs/operators';
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss']
 })
-export class SummaryComponent implements OnInit, OnDestroy {
+export class SummaryComponent implements OnInit {
 
-  private httpSubscriber: Subscription;
   categories: Observable<Category[]>;
 
   constructor(private store: Store<AppState>, private categoriesService: CategoriesService) {
@@ -35,14 +34,9 @@ export class SummaryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.httpSubscriber = this.categoriesService.getCategories().subscribe(
+    this.categoriesService.getCategories().then(
       categories => this.store.dispatch(new SetCategories(categories))
     );
   }
-
-  ngOnDestroy() {
-    this.httpSubscriber.unsubscribe();
-  }
-
 
 }

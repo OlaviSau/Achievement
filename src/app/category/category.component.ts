@@ -4,8 +4,6 @@ import {AppState} from '../app.state';
 import {Store} from '@ngrx/store';
 import {Category} from '../models/category';
 import {Achievement} from '../models/achievement';
-import {Observable, Subscription} from 'rxjs';
-import {map} from 'rxjs/operators';
 import {CategoriesService} from '../services/categories.service';
 import {SetCategory} from '../actions/set-category';
 
@@ -14,11 +12,9 @@ import {SetCategory} from '../actions/set-category';
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.scss']
 })
-export class CategoryComponent implements OnInit, OnDestroy {
+export class CategoryComponent implements OnInit {
 
   category: Category;
-  private routeSubscription: Subscription;
-  private httpSubscription: Subscription;
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute, private categoriesService: CategoriesService) {}
 
@@ -27,21 +23,14 @@ export class CategoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.routeSubscription = this.route.params.subscribe(({key}) => {
+    this.route.params.toPromise().then(({key}) => {
           this.store.select('categories').subscribe(
             categories => this.category = categories.find(category => category.key === key)
           );
-          this.httpSubscription = this.categoriesService.getCategory(key).subscribe(
+          this.categoriesService.getCategory(key).then(
             category => this.store.dispatch(new SetCategory(category))
           );
       }
     );
-  }
-
-  ngOnDestroy() {
-    this.routeSubscription.unsubscribe();
-    if (this.httpSubscription) {
-      this.httpSubscription.unsubscribe();
-    }
   }
 }
