@@ -1,18 +1,32 @@
 import {Achievement} from './achievement';
 
 export class Category {
+  constructor(properties) {
+    Object.assign(this, properties);
+  }
 
   id: number;
   key: string;
   name: string;
   achievements: Achievement[];
-  constructor(properties) {
-    Object.assign(this, properties);
+
+  private static sumPoints(total, achievement: Achievement) {
+    return total + achievement.points;
   }
 
   completionPercent() {
-    const sumPoints = (total, achievement) => total + achievement.points;
-    const completed: Achievement[] = this.achievements.filter(achievement => achievement.completed);
-    return (completed.reduce(sumPoints, 0) / this.achievements.reduce(sumPoints, 0)) * 100;
+    if (!this.totalPoints()) {
+      return 0;
+    }
+
+    return (this.completedPoints() / this.totalPoints()) * 100;
+  }
+
+  completedPoints() {
+    return this.achievements.filter(achievement => achievement.completed).reduce(Category.sumPoints, 0);
+  }
+
+  totalPoints() {
+    return this.achievements.reduce(Category.sumPoints, 0);
   }
 }

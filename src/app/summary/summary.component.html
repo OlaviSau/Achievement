@@ -1,6 +1,6 @@
 <div>
   <h1>TOTAL</h1>
-  <mat-progress-bar mode="determinate" value="40" class="total-progress-bar"></mat-progress-bar>
+  <mat-progress-bar mode="determinate" value="{{ totalCompletionPercent | async}}" class="total-progress-bar"></mat-progress-bar>
 </div>
 
 <div class="categories">

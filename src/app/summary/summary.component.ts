@@ -5,6 +5,7 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../app.state';
 import {CategoriesService} from '../services/categories.service';
 import {SetCategories} from '../actions/set-categories';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'ad-summary',
@@ -14,10 +15,21 @@ import {SetCategories} from '../actions/set-categories';
 export class SummaryComponent implements OnInit, OnDestroy {
 
   httpSubscriber: Subscription;
+  totalCompletionPercent: Observable<number>;
   categories: Observable<Category[]>;
 
   constructor(private store: Store<AppState>, private categoriesService: CategoriesService) {
     this.categories = store.select('categories');
+    this.totalCompletionPercent = this.categories.pipe(
+      map(categories => {
+          const total = categories.reduce( (sum, category) => sum + category.totalPoints(), 0);
+          if (!total) {
+            return 0;
+          }
+          return (categories.reduce((sum, category) => sum + category.completedPoints(), 0) / total) * 100;
+        }
+      )
+    );
   }
 
   ngOnInit() {
