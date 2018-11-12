@@ -1,6 +1,7 @@
 import {AchievementModel} from './achievement.model';
 import * as dasherize from 'dasherize';
 import {sum} from '../util/sum';
+import {infinityToZero} from '../util/infinity-to-zero';
 
 export class CategoryModel {
   constructor(properties: {
@@ -17,16 +18,14 @@ export class CategoryModel {
   achievements: AchievementModel[];
 
   completionPercent() {
-    const total = this.totalPoints();
-
-    return total && (this.completedPoints() / total) * 100;
+    return infinityToZero(100 * this.completedPoints() / this.totalPoints());
   }
 
   completedPoints() {
-    return this.achievements.filter(a => a.completed).map(a => a.points).reduce(sum, 0);
+    return sum(...this.achievements.filter(a => a.completed).map(a => a.points));
   }
 
   totalPoints() {
-    return this.achievements.map(a => a.points).reduce(sum, 0);
+    return sum(...this.achievements.map(a => a.points));
   }
 }

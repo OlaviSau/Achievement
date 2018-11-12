@@ -10,6 +10,7 @@ import {CreateCategoryAction} from '../actions/create-category.action';
 import {UpdateCategoryAction} from '../actions/update-category.action';
 import {SaveCategoryAction} from '../actions/save-category.action';
 import {sum} from '../util/sum';
+import {infinityToZero} from '../util/infinity-to-zero';
 
 @Component({
   selector: 'ad-summary',
@@ -36,8 +37,7 @@ export class SummaryComponent implements OnInit {
   private completionPercent(): Observable<number> {
     return this.categories.pipe(
       map(categories => {
-          const total = categories.map(c => c.totalPoints()).reduce(sum, 0);
-          return total && (categories.map(c => c.completedPoints()).reduce(sum, 0) / total) * 100;
+          return infinityToZero(100 * sum(...categories.map(c => c.completedPoints())) / sum(...categories.map(c => c.totalPoints())));
         }
       )
     );
