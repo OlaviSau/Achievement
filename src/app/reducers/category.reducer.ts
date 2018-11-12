@@ -39,5 +39,5 @@ export function categoryReducer(state = initialState, action: Action) {
     return {...state, list: [...state.list.filter(c => c.key !== c.key), category] };
   });
 
-  return handlers[action.type] || (a => state) (action);
+  return handlers[action.type] ? handlers[action.type](action) : state;
 }
