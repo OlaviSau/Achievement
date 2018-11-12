@@ -1,6 +1,6 @@
 <div *ngIf="category">
   <h1 class="category-name">{{category.name}}</h1>
-  <mat-progress-bar mode="determinate" value="{{category.completionPercent()}}" class="total-progress-bar"></mat-progress-bar>
+  <mat-progress-bar mode="determinate" [value]="category.completionPercent()" class="total-progress-bar"></mat-progress-bar>
 </div>
 
 <div *ngIf="category" class="achievements">

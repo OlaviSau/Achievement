@@ -1,12 +1,12 @@
 <div>
   <h1>TOTAL</h1>
-  <mat-progress-bar mode="determinate" value="{{ completionPercent() | async}}" class="total-progress-bar"></mat-progress-bar>
+  <mat-progress-bar mode="determinate" [value]="completionPercent() | async" class="total-progress-bar"></mat-progress-bar>
 </div>
 
 <div class="categories">
   <div *ngFor="let category of categories | async" class="category" routerLink="/{{category.key}}">
     <h2>{{category.name}}</h2>
-    <mat-progress-bar mode="determinate" value="{{category.completionPercent()}}"></mat-progress-bar>
+    <mat-progress-bar mode="determinate" [value]="category.completionPercent()"></mat-progress-bar>
   </div>
   <div class="category create" [class.creating]="categoryBeingCreated | async" (click)="createCategory()">
     <i  class="fa fa-plus"></i>
@@ -17,7 +17,7 @@
             [adFocusOnInit] adBlurOnEnter
             contenteditable="true"
     ></h2>
-    <mat-progress-bar *ngIf="categoryBeingCreated | async" mode="determinate" value="0"></mat-progress-bar>
+    <mat-progress-bar *ngIf="categoryBeingCreated | async" mode="determinate" [value]="g0"></mat-progress-bar>
   </div>
 </div>
 
