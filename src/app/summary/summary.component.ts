@@ -32,15 +32,16 @@ export class SummaryComponent implements OnInit {
 
   saveCategory(categoryObserver: Observable<CategoryModel>) {
     categoryObserver.pipe(first()).subscribe(
-      category => this.store.dispatch(new SaveCategoryAction(category))
+      category => {
+        if (category) {
+          this.store.dispatch(new SaveCategoryAction(category));
+        }
+      }
     );
   }
 
-  updateCategory($event, id) {
-    this.store.dispatch(new UpdateCategoryAction($event.target.textContent, id));
-    if ($event.key === 13) {
-      this.saveCategory(this.categoryBeingCreated);
-    }
+  updateCategory($event) {
+    this.store.dispatch(new UpdateCategoryAction($event.target.textContent));
   }
 
   createCategory() {

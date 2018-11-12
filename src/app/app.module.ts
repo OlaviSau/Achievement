@@ -13,9 +13,11 @@ import {CachingInterceptor} from './http-interceptors/cache.http-interceptor';
 import {FocusOnInitDirective} from './directives/focus-on-init.directive';
 import {EffectsModule} from '@ngrx/effects';
 import {CategoryEffects} from './effects/category.effects';
+import {BlurOnEnterDirective} from './directives/blur-on-enter.directive';
 
 @NgModule({
   declarations: [
+    BlurOnEnterDirective,
     FocusOnInitDirective,
     AppComponent,
     SummaryComponent,
