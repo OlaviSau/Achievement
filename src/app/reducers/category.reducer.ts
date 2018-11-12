@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
+import {CategoryModel} from '../models/category.model';
 import {CREATE_CATEGORY} from '../actions/create-category.action';
 import {SET_CATEGORY, SetCategoryAction} from '../actions/set-category.action';
 import {SET_CATEGORIES, SetCategoriesAction} from '../actions/set-categories.action';
 import {UPDATE_CATEGORY, UpdateCategoryAction} from '../actions/update-category.action';
-import {CategoryModel} from '../models/category.model';
 import {SAVE_CATEGORY, SaveCategoryAction} from '../actions/save-category.action';
 
 /* tslint:disable:max-line-length */
@@ -15,37 +15,29 @@ const initialState = {
 
 
 export function categoryReducer(state = initialState, action: Action) {
-  switch (action.type) {
-    case SET_CATEGORY:
-      const categoryToSet = (action as SetCategoryAction).category;
-      return Object.assign({}, state, {
-        list: state.list.filter(category => category.key !== categoryToSet.key).concat([categoryToSet])
-      });
-    case SET_CATEGORIES:
-      return Object.assign({}, state, {
-        list: (action as SetCategoriesAction).categories,
-      });
-    case SAVE_CATEGORY:
-      const categoryToSave = (action as SaveCategoryAction).category;
-      const update = {
-        categoryBeingCreated: null,
-        list: state.list
-      };
-      if (categoryToSave.name) {
-        update.list = state.list.concat([categoryToSave]);
-      }
-      return Object.assign({}, state, update);
-    case UPDATE_CATEGORY:
-      return Object.assign({}, state, {
-        categoryBeingCreated: new CategoryModel({
-          name: (action as UpdateCategoryAction).name
-        }),
-      });
-    case CREATE_CATEGORY:
-      return Object.assign({}, state, {
-        categoryBeingCreated: new CategoryModel({}),
-      });
-    default:
-      return state;
+  const handlers = {};
+  function addHandler(type, handler) {
+    handlers[type] = handler;
   }
+  addHandler(CREATE_CATEGORY, () => {
+    return {...state, categoryBeingCreated: new CategoryModel({})};
+  });
+
+  addHandler(UPDATE_CATEGORY, ({name}: UpdateCategoryAction) => {
+    return {...state, categoryBeingCreated: new CategoryModel({ name: name }) };
+  });
+
+  addHandler(SAVE_CATEGORY, ({category}: SaveCategoryAction) => {
+    return {...state, categoryBeingCreated: null, list: category.name ? [...state.list, category] : state.list };
+  });
+
+  addHandler(SET_CATEGORIES, ({categories}: SetCategoriesAction) => {
+    return {...state, list: categories };
+  });
+
+  addHandler(SET_CATEGORY, ({category}: SetCategoryAction) => {
+    return {...state, list: [...state.list.filter(c => c.key !== c.key), category] };
+  });
+
+  return handlers[action.type] || (a => state) (action);
 }
