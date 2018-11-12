@@ -36,9 +36,9 @@ export class SummaryComponent implements OnInit {
 
   private completionPercent(): Observable<number> {
     return this.categories.pipe(
-      map(categories => {
-          return infinityToZero(100 * sum(...categories.map(c => c.completedPoints())) / sum(...categories.map(c => c.totalPoints())));
-        }
+      map(categories => infinityToZero(
+          100 * sum(...categories.map(c => c.completedPoints())) / sum(...categories.map(c => c.totalPoints()))
+        )
       )
     );
   }
