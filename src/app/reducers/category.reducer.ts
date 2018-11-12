@@ -15,29 +15,23 @@ const initialState = {
 
 
 export function categoryReducer(state = initialState, action: Action) {
-  const handlers = {};
-  function addHandler(type, handler) {
-    handlers[type] = handler;
-  }
-  addHandler(CREATE_CATEGORY, () => {
-    return {...state, categoryBeingCreated: new CategoryModel({})};
-  });
-
-  addHandler(UPDATE_CATEGORY, ({name}: UpdateCategoryAction) => {
-    return {...state, categoryBeingCreated: new CategoryModel({ name: name }) };
-  });
-
-  addHandler(SAVE_CATEGORY, ({category}: SaveCategoryAction) => {
-    return {...state, categoryBeingCreated: null, list: category.name ? [...state.list, category] : state.list };
-  });
-
-  addHandler(SET_CATEGORIES, ({categories}: SetCategoriesAction) => {
-    return {...state, list: categories };
-  });
-
-  addHandler(SET_CATEGORY, ({category}: SetCategoryAction) => {
-    return {...state, list: [...state.list.filter(c => c.key !== c.key), category] };
-  });
-
+  const handlers = {
+    [CREATE_CATEGORY]() {
+      return {...state, categoryBeingCreated: new CategoryModel({})};
+    },
+    [UPDATE_CATEGORY]({name}: UpdateCategoryAction) {
+      return {...state, categoryBeingCreated: new CategoryModel({ name: name }) };
+    },
+    [SAVE_CATEGORY]({category}: SaveCategoryAction) {
+      return {...state, categoryBeingCreated: null, list: category.name ? [...state.list, category] : state.list };
+    },
+    [SET_CATEGORIES]({categories}: SetCategoriesAction) {
+      return {...state, list: categories };
+    },
+    [SET_CATEGORY]({category}: SetCategoryAction) {
+      return {...state, list: [...state.list.filter(c => c.key !== c.key), category] };
+    }
+  };
+g
   return handlers[action.type] ? handlers[action.type](action) : state;
 }
