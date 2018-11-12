@@ -5,7 +5,7 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../app.state';
 import {CategoryService} from '../services/category.service';
 import {SetCategoriesAction} from '../actions/set-categories.action';
-import {first, last, map} from 'rxjs/operators';
+import {filter, first, last, map} from 'rxjs/operators';
 import {CreateCategoryAction} from '../actions/create-category.action';
 import {UpdateCategoryAction} from '../actions/update-category.action';
 import {SaveCategoryAction} from '../actions/save-category.action';
@@ -31,11 +31,9 @@ export class SummaryComponent implements OnInit {
   }
 
   saveCategory(categoryObserver: Observable<CategoryModel>) {
-    categoryObserver.pipe(first()).subscribe(
+    categoryObserver.pipe(first(), filter(Boolean)).subscribe(
       category => {
-        if (category) {
-          this.store.dispatch(new SaveCategoryAction(category));
-        }
+        this.store.dispatch(new SaveCategoryAction(category));
       }
     );
   }
