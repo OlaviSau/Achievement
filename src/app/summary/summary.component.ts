@@ -44,10 +44,7 @@ export class SummaryComponent implements OnInit {
     return this.categories.pipe(
       map(categories => {
           const total = categories.reduce( (sum, category) => sum + category.totalPoints(), 0);
-          if (!total) {
-            return 0;
-          }
-          return (categories.reduce((sum, category) => sum + category.completedPoints(), 0) / total) * 100;
+          return total ? (categories.reduce((sum, category) => sum + category.completedPoints(), 0) / total) * 100 : 0;
         }
       )
     );
