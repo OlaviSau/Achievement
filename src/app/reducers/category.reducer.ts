@@ -15,7 +15,7 @@ const initialState = {
 
 
 export function categoryReducer(state = initialState, action: Action) {
-  const handlers = {
+  const handler = {
     [CREATE_CATEGORY]() {
       return {...state, categoryBeingCreated: new CategoryModel({})};
     },
@@ -31,7 +31,7 @@ export function categoryReducer(state = initialState, action: Action) {
     [SET_CATEGORY]({category}: SetCategoryAction) {
       return {...state, list: [...state.list.filter(c => c.key !== c.key), category] };
     }
-  };
-g
-  return handlers[action.type] ? handlers[action.type](action) : state;
+  }[action.type];
+
+  return handler ? handler(action) : state;
 }
