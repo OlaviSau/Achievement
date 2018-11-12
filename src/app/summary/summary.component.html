@@ -14,7 +14,7 @@
             *ngIf="categoryBeingCreated | async"
             (keyup)="updateCategory($event)"
             (blur)="saveCategory(categoryBeingCreated)"
-            [adFocusOnInit] adBlurOnEnter
+            adFocusOnInit adBlurOnEnter
             contenteditable="true"
     ></h2>
     <mat-progress-bar *ngIf="categoryBeingCreated | async" mode="determinate" [value]="0"></mat-progress-bar>
