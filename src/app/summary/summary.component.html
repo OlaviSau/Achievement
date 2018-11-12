@@ -10,7 +10,7 @@
   </div>
   <div class="category create" [class.creating]="categoryBeingCreated | async" (click)="createCategory()">
     <i  class="fa fa-plus"></i>
-    <h2 *ngIf="categoryBeingCreated | async" (keyup)="updateCategory($event.target.value)" (blur)="saveCategory(categoryBeingCreated)"  [adFocusOnInit] contenteditable="true"></h2>
+    <h2 *ngIf="categoryBeingCreated | async" (keyup)="updateCategory($event)" (blur)="saveCategory(categoryBeingCreated)"  [adFocusOnInit] contenteditable="true"></h2>
     <mat-progress-bar *ngIf="categoryBeingCreated | async" mode="determinate" value="0"></mat-progress-bar>
   </div>
 </div>
