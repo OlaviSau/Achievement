@@ -26,10 +26,15 @@ export function categoryReducer(state = initialState, action: Action) {
         list: (action as SetCategoriesAction).categories,
       });
     case SAVE_CATEGORY:
-      return Object.assign({}, state, {
-          categoryBeingCreated: null,
-          list: state.list.concat([(action as SaveCategoryAction).category])
-      });
+      const categoryToSave = (action as SaveCategoryAction).category;
+      const update = {
+        categoryBeingCreated: null,
+        list: state.list
+      };
+      if (categoryToSave.name) {
+        update.list = state.list.concat([categoryToSave]);
+      }
+      return Object.assign({}, state, update);
     case UPDATE_CATEGORY:
       return Object.assign({}, state, {
         categoryBeingCreated: new CategoryModel({
