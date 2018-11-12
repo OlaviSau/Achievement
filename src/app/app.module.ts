@@ -11,6 +11,8 @@ import {categoryReducer} from './reducers/category.reducer';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {CachingInterceptor} from './http-interceptors/cache.http-interceptor';
 import {FocusOnInitDirective} from './directives/focus-on-init.directive';
+import {EffectsModule} from '@ngrx/effects';
+import {CategoryEffects} from './effects/category.effects';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,8 @@ import {FocusOnInitDirective} from './directives/focus-on-init.directive';
     MatProgressBarModule,
     StoreModule.forRoot({
       category: categoryReducer
-    })
+    }),
+    EffectsModule.forRoot([CategoryEffects])
   ],
   providers: [
     {

@@ -1,11 +1,14 @@
 import {AchievementModel} from './achievement.model';
 
 export class CategoryModel {
-  constructor(properties = {}) {
-    Object.assign(this, properties);
+  constructor(properties: {
+    name?: string;
+    achievements?: AchievementModel[];
+  } = {}) {
+    this.name = properties.name;
+    this.achievements = properties.achievements;
   }
 
-  id: number;
   key: string;
   name: string;
   achievements: AchievementModel[] = [];

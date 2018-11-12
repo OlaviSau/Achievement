@@ -4,7 +4,7 @@ import {AppState} from '../app.state';
 import {Store} from '@ngrx/store';
 import {CategoryModel} from '../models/category.model';
 import {AchievementModel} from '../models/achievement.model';
-import {CategoriesService} from '../services/categories.service';
+import {CategoryService} from '../services/category.service';
 import {SetCategoryAction} from '../actions/set-category.action';
 import {Subscription} from 'rxjs';
 
@@ -18,7 +18,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
   category: CategoryModel;
   routeSubscription: Subscription;
 
-  constructor(private store: Store<AppState>, private route: ActivatedRoute, private categoriesService: CategoriesService) {}
+  constructor(private store: Store<AppState>, private route: ActivatedRoute, private categoryService: CategoryService) {}
 
   sortByCompletion(achievements: AchievementModel[]) {
     return achievements.sort((l: AchievementModel, r: AchievementModel) => l.completed ? -1 : 1 );
@@ -29,7 +29,7 @@ export class CategoryComponent implements OnInit, OnDestroy {
           this.store.select('category').subscribe(
             categoryStore => this.category = categoryStore.list.find(category => category.key === key)
           );
-          this.categoriesService.getCategory(key).then(
+          this.categoryService.get(key).then(
             category => this.store.dispatch(new SetCategoryAction(category))
           );
       }

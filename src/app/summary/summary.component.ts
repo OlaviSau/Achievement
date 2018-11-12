@@ -3,11 +3,12 @@ import {Observable} from 'rxjs';
 import {CategoryModel} from '../models/category.model';
 import {Store} from '@ngrx/store';
 import {AppState} from '../app.state';
-import {CategoriesService} from '../services/categories.service';
+import {CategoryService} from '../services/category.service';
 import {SetCategoriesAction} from '../actions/set-categories.action';
 import {map} from 'rxjs/operators';
 import {CreateCategoryAction} from '../actions/create-category.action';
 import {UpdateCategoryAction} from '../actions/update-category.action';
+import {SaveCategoryAction} from '../actions/save-category.action';
 
 @Component({
   selector: 'ad-summary',
@@ -19,12 +20,19 @@ export class SummaryComponent implements OnInit {
   categories: Observable<CategoryModel[]>;
   categoryBeingCreated: Observable<CategoryModel>;
 
-  constructor(private store: Store<AppState>, private categoriesService: CategoriesService) {
-    this.categories = store.select('category').pipe(
+  constructor(private store: Store<AppState>, private categoriesService: CategoryService) {
+    const categoryStoreObserver = store.select('category');
+    this.categories = categoryStoreObserver.pipe(
       map(categoryStore => categoryStore.list)
     );
-    this.categoryBeingCreated = store.select('category').pipe(
-      map(categoryCreation => categoryCreation.categoryBeingCreated)
+    this.categoryBeingCreated = categoryStoreObserver.pipe(
+      map(categoryStore => categoryStore.categoryBeingCreated)
+    );
+  }
+
+  saveCategory(categoryObserver: Observable<CategoryModel>) {
+    categoryObserver.subscribe(
+      category => this.store.dispatch(new SaveCategoryAction(category))
     );
   }
 
@@ -50,7 +58,7 @@ export class SummaryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.categoriesService.getCategories().then(
+    this.categoriesService.get().then(
       categories => this.store.dispatch(new SetCategoriesAction(categories))
     );
   }
