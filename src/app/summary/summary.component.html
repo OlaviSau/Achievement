@@ -12,7 +12,8 @@
     <i  class="fa fa-plus"></i>
     <h2
             *ngIf="categoryBeingCreated | async"
-            (keyup)="updateCategory($event)"
+            #category
+            (keyup)="updateCategory(category.textContent)"
             (blur)="saveCategory(categoryBeingCreated)"
             adFocusOnInit adBlurOnEnter
             contenteditable="true"

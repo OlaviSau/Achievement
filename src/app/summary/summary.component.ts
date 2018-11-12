@@ -40,8 +40,8 @@ export class SummaryComponent implements OnInit {
     );
   }
 
-  updateCategory($event) {
-    this.store.dispatch(new UpdateCategoryAction($event.target.textContent));
+  updateCategory(name) {
+    this.store.dispatch(new UpdateCategoryAction(name));
   }
 
   createCategory() {
