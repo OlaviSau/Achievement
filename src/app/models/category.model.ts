@@ -17,11 +17,9 @@ export class CategoryModel {
   achievements: AchievementModel[];
 
   completionPercent() {
-    if (!this.totalPoints()) {
-      return 0;
-    }
+    const total = this.totalPoints();
 
-    return (this.completedPoints() / this.totalPoints()) * 100;
+    return total && (this.completedPoints() / total) * 100;
   }
 
   completedPoints() {
