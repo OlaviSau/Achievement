@@ -40,13 +40,9 @@ export class SummaryComponent implements OnInit {
     );
   }
 
-  updateCategory(name) {
-    this.store.dispatch(new UpdateCategoryAction(name));
-  }
+  updateCategory(name) { this.store.dispatch(new UpdateCategoryAction(name)); }
 
-  createCategory() {
-    this.store.dispatch(new CreateCategoryAction());
-  }
+  createCategory() { this.store.dispatch(new CreateCategoryAction()); }
 
   private completionPercent(): Observable<number> {
     return this.categories.pipe(
