@@ -26,7 +26,6 @@ export function categoryReducer(state = initialState, action: Action) {
         list: (action as SetCategoriesAction).categories,
       });
     case SAVE_CATEGORY:
-      return state;
       return Object.assign({}, state, {
         categoryBeingCreated: null,
         list: state.list.concat([(action as SaveCategoryAction).category])
