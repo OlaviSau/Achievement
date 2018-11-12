@@ -21,15 +21,7 @@ export class SummaryComponent implements OnInit {
   categories: Observable<CategoryModel[]>;
   categoryBeingCreated: Observable<CategoryModel>;
 
-  constructor(private store: Store<AppState>, private categoriesService: CategoryService) {
-    const categoryStoreObserver = store.select('category');
-    this.categories = categoryStoreObserver.pipe(
-      map(categoryStore => categoryStore.list)
-    );
-    this.categoryBeingCreated = categoryStoreObserver.pipe(
-      map(categoryStore => categoryStore.categoryBeingCreated)
-    );
-  }
+  constructor(private store: Store<AppState>, private categoriesService: CategoryService) {}
 
   saveCategory(categoryObserver: Observable<CategoryModel>) {
     categoryObserver.pipe(first(), filter(Boolean)).subscribe(
@@ -52,6 +44,13 @@ export class SummaryComponent implements OnInit {
   }
 
   ngOnInit() {
+    const categoryStoreObserver = this.store.select('category');
+    this.categories = categoryStoreObserver.pipe(
+      map(categoryStore => categoryStore.list)
+    );
+    this.categoryBeingCreated = categoryStoreObserver.pipe(
+      map(categoryStore => categoryStore.categoryBeingCreated)
+    );
     this.categoriesService.get().then(
       categories => this.store.dispatch(new SetCategoriesAction(categories))
     );
