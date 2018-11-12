@@ -11,7 +11,7 @@ export class CategoryService {
   constructor(private http: HttpClient) { }
 
   save(category: CategoryModel) {
-    return this.http.put(`http://api.achievement.ee:8080/categoryg/${category.key}`, category).subscribe(
+    return this.http.put(`http://api.achievement.ee:8080/category/${category.key}`, category).subscribe(
       response => console.log(response)
     );
   }

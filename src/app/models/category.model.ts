@@ -1,17 +1,21 @@
 import {AchievementModel} from './achievement.model';
+import * as dasherize from 'dasherize';
 
 export class CategoryModel {
   constructor(properties: {
     name?: string;
     achievements?: AchievementModel[];
-  } = {}) {
+  } = {
+    achievements: []
+  }) {
     this.name = properties.name;
+    this.key = dasherize(properties.name);
     this.achievements = properties.achievements;
   }
 
   key: string;
   name: string;
-  achievements: AchievementModel[] = [];
+  achievements: AchievementModel[];
 
   private static sumPoints(total, achievement: AchievementModel) {
     return total + achievement.points;

@@ -19,7 +19,7 @@ export function categoryReducer(state = initialState, action: Action) {
     case SET_CATEGORY:
       const categoryToSet = (action as SetCategoryAction).category;
       return Object.assign({}, state, {
-        list: state.list.filter(category => category.id !== categoryToSet.id).concat([categoryToSet])
+        list: state.list.filter(category => category.key !== categoryToSet.key).concat([categoryToSet])
       });
     case SET_CATEGORIES:
       return Object.assign({}, state, {

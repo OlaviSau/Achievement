@@ -31,8 +31,12 @@ export class SummaryComponent implements OnInit {
   }
 
   saveCategory(categoryObserver: Observable<CategoryModel>) {
-    categoryObserver.subscribe(
-      category => this.store.dispatch(new SaveCategoryAction(category))
+    const subscription = categoryObserver.subscribe(
+      category => {
+        console.log(category);
+        this.store.dispatch(new SaveCategoryAction(category));
+        subscription.unsubscribe();
+      }
     );
   }
 
