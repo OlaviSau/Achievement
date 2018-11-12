@@ -5,7 +5,7 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../app.state';
 import {CategoryService} from '../services/category.service';
 import {SetCategoriesAction} from '../actions/set-categories.action';
-import {filter, first, last, map} from 'rxjs/operators';
+import {filter, first, map} from 'rxjs/operators';
 import {CreateCategoryAction} from '../actions/create-category.action';
 import {UpdateCategoryAction} from '../actions/update-category.action';
 import {SaveCategoryAction} from '../actions/save-category.action';
