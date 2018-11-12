@@ -32,9 +32,7 @@ export class SummaryComponent implements OnInit {
 
   saveCategory(categoryObserver: Observable<CategoryModel>) {
     categoryObserver.pipe(first(), filter(Boolean)).subscribe(
-      category => {
-        this.store.dispatch(new SaveCategoryAction(category));
-      }
+      category => this.store.dispatch(new SaveCategoryAction(category))
     );
   }
 
