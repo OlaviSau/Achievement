@@ -25,21 +25,6 @@ export class SummaryComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<AppState>, private categoriesService: CategoryService) {}
 
-  saveCategory(category: CategoryModel) { this.store.dispatch(new SaveCategoryAction(category)); }
-
-  updateCategory(name) { this.store.dispatch(new UpdateCategoryAction(name)); }
-
-  createCategory() { this.store.dispatch(new CreateCategoryAction()); }
-
-  private completionPercent(): Observable<number> {
-    return this.categories.pipe(
-      map(categories => infinityToZero(
-          100 * sum(...categories.map(c => c.completedPoints())) / sum(...categories.map(c => c.totalPoints()))
-        )
-      )
-    );
-  }
-
   ngOnInit() {
     const categoryStoreObserver = this.store.select('category');
     this.categories = categoryStoreObserver.pipe(
@@ -55,6 +40,21 @@ export class SummaryComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.categoryBeingCreatedSubscription.unsubscribe();
+  }
+
+  saveCategory(category: CategoryModel) { this.store.dispatch(new SaveCategoryAction(category)); }
+
+  updateCategory(name) { this.store.dispatch(new UpdateCategoryAction(name)); }
+
+  createCategory() { this.store.dispatch(new CreateCategoryAction()); }
+
+  completionPercent(): Observable<number> {
+    return this.categories.pipe(
+      map(categories => infinityToZero(
+          100 * sum(...categories.map(c => c.completedPoints())) / sum(...categories.map(c => c.totalPoints()))
+        )
+      )
+    );
   }
 
 }
