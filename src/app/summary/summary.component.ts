@@ -11,6 +11,7 @@ import {UpdateCategoryAction} from '../actions/update-category.action';
 import {SaveCategoryAction} from '../actions/save-category.action';
 import {sum} from '../util/sum';
 import {infinityToZero} from '../util/infinity-to-zero';
+import {CategoryCollection} from '../collections/category.collection';
 
 @Component({
   selector: 'ad-summary',
@@ -19,7 +20,7 @@ import {infinityToZero} from '../util/infinity-to-zero';
 })
 export class SummaryComponent implements OnInit, OnDestroy {
 
-  categories: CategoryModel[] = [];
+  collection: CategoryCollection;
   categoryBeingCreated: CategoryModel;
   private categoryStoreSubscription: Subscription;
 
@@ -28,7 +29,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.categoryStoreSubscription = this.store.select('category').subscribe(
       categoryStore => {
-        this.categories = categoryStore.list;
+        this.collection = new CategoryCollection(categoryStore.list);
         this.categoryBeingCreated = categoryStore.categoryBeingCreated;
       }
     );
@@ -44,11 +45,5 @@ export class SummaryComponent implements OnInit, OnDestroy {
   updateCategory(name) { this.store.dispatch(new UpdateCategoryAction(name)); }
 
   createCategory() { this.store.dispatch(new CreateCategoryAction()); }
-
-  completionPercent(): number {
-    return infinityToZero(
-      100 * sum(...this.categories.map(c => c.completedPoints())) / sum(...this.categories.map(c => c.totalPoints()))
-    );
-  }
 
 }
