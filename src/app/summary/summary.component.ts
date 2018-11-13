@@ -9,7 +9,7 @@ import {CategoryCollection} from '../collections/category.collection';
 import {Subscription} from 'rxjs';
 import {CategoryService} from '../services/category.service';
 import {SetCategoriesAction} from '../actions/set-categories.action';
-import {SubscriptionCollector} from '../subscruotion-collector';
+import {SubscriptionCollector} from '../subscription-collector';
 
 @Component({
   selector: 'ad-summary',
