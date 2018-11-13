@@ -38,9 +38,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy() {
-    this.categoryBeingCreatedSubscription.unsubscribe();
-  }
+  ngOnDestroy() { this.categoryBeingCreatedSubscription.unsubscribe(); }
 
   saveCategory(category: CategoryModel) { this.store.dispatch(new SaveCategoryAction(category)); }
 
