@@ -1,5 +1,5 @@
 import {AchievementModel} from './achievement.model';
-import * as dasherize from 'dasherize';
+import * as dashify from 'dashify';
 import {sum} from '../util/sum';
 import {infinityToZero} from '../util/infinity-to-zero';
 
@@ -9,7 +9,7 @@ export class CategoryModel {
     achievements?: AchievementModel[];
   } = {}) {
     this.name = properties.name;
-    this.key = dasherize(properties.name);
+    this.key = dashify(properties.name);
     this.achievements = properties.achievements || [];
   }
 
