@@ -25,9 +25,7 @@ export class SummaryComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<AppState>, private categoriesService: CategoryService) {}
 
-  saveCategory(category: CategoryModel) {
-    this.store.dispatch(new SaveCategoryAction(category));
-  }
+  saveCategory(category: CategoryModel) { this.store.dispatch(new SaveCategoryAction(category)); }
 
   updateCategory(name) { this.store.dispatch(new UpdateCategoryAction(name)); }
 
