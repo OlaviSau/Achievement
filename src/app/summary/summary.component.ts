@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Observable, Subscription} from 'rxjs';
 import {CategoryModel} from '../models/category.model';
 import {Store} from '@ngrx/store';
 import {AppState} from '../app.state';
 import {CategoryService} from '../services/category.service';
 import {SetCategoriesAction} from '../actions/set-categories.action';
-import {filter, first, map} from 'rxjs/operators';
+import {map} from 'rxjs/operators';
 import {CreateCategoryAction} from '../actions/create-category.action';
 import {UpdateCategoryAction} from '../actions/update-category.action';
 import {SaveCategoryAction} from '../actions/save-category.action';
@@ -17,17 +17,16 @@ import {infinityToZero} from '../util/infinity-to-zero';
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss']
 })
-export class SummaryComponent implements OnInit {
+export class SummaryComponent implements OnInit, OnDestroy {
 
   categories: Observable<CategoryModel[]>;
-  categoryBeingCreated: Observable<CategoryModel>;
+  categoryBeingCreated: CategoryModel;
+  private categoryBeingCreatedSubscription: Subscription;
 
   constructor(private store: Store<AppState>, private categoriesService: CategoryService) {}
 
-  saveCategory(categoryObserver: Observable<CategoryModel>) {
-    categoryObserver.pipe(first(), filter(Boolean)).subscribe(
-      category => this.store.dispatch(new SaveCategoryAction(category))
-    );
+  saveCategory(category: CategoryModel) {
+    this.store.dispatch(new SaveCategoryAction(category));
   }
 
   updateCategory(name) { this.store.dispatch(new UpdateCategoryAction(name)); }
@@ -48,12 +47,16 @@ export class SummaryComponent implements OnInit {
     this.categories = categoryStoreObserver.pipe(
       map(categoryStore => categoryStore.list)
     );
-    this.categoryBeingCreated = categoryStoreObserver.pipe(
-      map(categoryStore => categoryStore.categoryBeingCreated)
+    this.categoryBeingCreatedSubscription = categoryStoreObserver.subscribe(
+      categoryStore => this.categoryBeingCreated = categoryStore.categoryBeingCreated
     );
     this.categoriesService.get().then(
       categories => this.store.dispatch(new SetCategoriesAction(categories))
     );
+  }
+
+  ngOnDestroy() {
+    this.categoryBeingCreatedSubscription.unsubscribe();
   }
 
 }

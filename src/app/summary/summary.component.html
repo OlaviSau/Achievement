@@ -8,17 +8,17 @@
     <h2>{{category.name}}</h2>
     <mat-progress-bar mode="determinate" [value]="category.completionPercent()"></mat-progress-bar>
   </div>
-  <div class="category create" [class.creating]="categoryBeingCreated | async" (click)="createCategory()">
+  <div class="category create" [class.creating]="categoryBeingCreated" (click)="createCategory()">
     <i  class="fa fa-plus"></i>
     <h2
-            *ngIf="categoryBeingCreated | async"
+            *ngIf="categoryBeingCreated"
             #category
             (keyup)="updateCategory(category.textContent)"
             (blur)="saveCategory(categoryBeingCreated)"
             adFocusOnInit adBlurOnEnter
             contenteditable="true"
     ></h2>
-    <mat-progress-bar *ngIf="categoryBeingCreated | async" mode="determinate" [value]="0"></mat-progress-bar>
+    <mat-progress-bar *ngIf="categoryBeingCreated" mode="determinate" [value]="0"></mat-progress-bar>
   </div>
 </div>
 
