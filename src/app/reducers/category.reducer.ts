@@ -13,13 +13,13 @@ const initialState = {
 export function categoryReducer(state = initialState, action: Action) {
   const handler = {
     [SAVE_CATEGORY]({category}: SaveCategoryAction) {
-      return {...state, list: [...state.list, category]};
+      return {...state, list: [...state.list.filter(c => c.id !== category.getId()), category]};
     },
     [SET_CATEGORIES]({categories}: SetCategoriesAction) {
       return {...state, list: categories };
     },
     [SET_CATEGORY]({category}: SetCategoryAction) {
-      return {...state, list: [...state.list.filter(c => c.key !== c.key), category] };
+      return {...state, list: [...state.list.filter(c => c.id !== category.getId()), category] };
     }
   }[action.type];
 

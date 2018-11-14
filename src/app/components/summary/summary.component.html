@@ -6,26 +6,28 @@
 <div class="categories">
   <div *ngFor="let category of categoryCollection | async" class="category" routerLink="/{{category.key}}">
     <i  class="fa fa-edit" (click)="updateCategory(category)" adStopClickPropagation></i>
+    <h2 *ngIf="categoryInFocus !== category">{{category.name}}</h2>
     <h2
+            *ngIf="categoryInFocus === category"
             #name
-            (keyup)="categoryBeingUpdated.setName(name.textContent)"
-            (blur)="saveCategory(categoryBeingUpdated)"
-            adBlurOnEnter
-            [contentEditable]="categoryBeingUpdated === category"
-    >{{category.name}}</h2>
-    <mat-progress-bar mode="determinate" [value]="category.completionPercent()"></mat-progress-bar>
-  </div>
-  <div class="category create" [class.creating]="categoryBeingCreated" (click)="createCategory()">
-    <i  class="fa fa-plus"></i>
-    <h2
-            *ngIf="categoryBeingCreated"
-            #name
-            (keyup)="categoryBeingCreated.setName(name.textContent)"
-            (blur)="saveCategory(categoryBeingCreated)"
+            (keyup)="categoryInFocus.setName(name.textContent)"
+            (blur)="saveCategory(categoryInFocus)"
             adFocusOnInit adBlurOnEnter
             contentEditable
     ></h2>
-    <mat-progress-bar *ngIf="categoryBeingCreated" mode="determinate" [value]="0"></mat-progress-bar>
+    <mat-progress-bar mode="determinate" [value]="category.completionPercent()"></mat-progress-bar>
+  </div>
+  <div class="category create" [class.creating]="categoryInFocus?.id === undefined" (click)="updateCategory()">
+    <i  class="fa fa-plus"></i>
+    <h2
+            *ngIf="categoryInFocus?.id === undefined"
+            #name
+            (keyup)="categoryInFocus.setName(name.textContent)"
+            (blur)="saveCategory(categoryInFocus)"
+            adFocusOnInit adBlurOnEnter
+            contentEditable
+    ></h2>
+    <mat-progress-bar *ngIf="categoryInFocus?.id === undefined" mode="determinate" [value]="0"></mat-progress-bar>
   </div>
 </div>
 

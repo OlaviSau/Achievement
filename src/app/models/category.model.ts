@@ -4,15 +4,18 @@ import {sum} from '../util/sum';
 import {infinityToZero} from '../util/infinity-to-zero';
 
 export class CategoryModel {
-  constructor({name, achievements} = {name: '', achievements: []}) {
+  constructor({id, name, achievements} = {id: undefined, name: '', achievements: []}) {
+    this.id = id;
     this.setName(name);
     this.setAchievements(achievements);
   }
 
+  private id: number;
   private key: string;
   private name: string;
   achievements: AchievementModel[];
 
+  public getId() { return this.id; }
   public getKey() { return this.key; }
   public getName() { return this.name; }
 

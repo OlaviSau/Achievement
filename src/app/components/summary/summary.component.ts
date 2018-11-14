@@ -17,11 +17,7 @@ export class SummaryComponent implements OnInit {
   constructor(private store: Store<AppState>) {}
 
   categoryCollection: Observable<CategoryCollection>;
-  // I decided to keep 2 different properties because
-  // 1) There is no way to differentiate between a new and a existing category
-  // 2) There are no good names for the category being worked on - considered active, current, <no prefix>, BeingWorkedOn
-  categoryBeingCreated: CategoryModel;
-  categoryBeingUpdated: CategoryModel;
+  categoryInFocus: CategoryModel;
 
   ngOnInit() {
     this.categoryCollection = this.store.select('category').pipe(
@@ -33,11 +29,8 @@ export class SummaryComponent implements OnInit {
     if (category.getName()) {
       this.store.dispatch(new SaveCategoryAction(category));
     }
-    this.categoryBeingCreated = null;
-    this.categoryBeingUpdated = null;
+    this.categoryInFocus = null;
   }
 
-  createCategory() { this.categoryBeingCreated = new CategoryModel(); }
-
-  updateCategory(category) { this.categoryBeingUpdated = category; }
+  updateCategory(category = new CategoryModel()) { this.categoryInFocus = category; }
 }
