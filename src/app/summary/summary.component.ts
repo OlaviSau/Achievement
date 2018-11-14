@@ -2,8 +2,6 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CategoryModel} from '../models/category.model';
 import {Store} from '@ngrx/store';
 import {AppState} from '../app.state';
-import {CreateCategoryAction} from '../actions/create-category.action';
-import {UpdateCategoryAction} from '../actions/update-category.action';
 import {SaveCategoryAction} from '../actions/save-category.action';
 import {CategoryCollection} from '../collections/category.collection';
 import {Subscription} from 'rxjs';
@@ -21,16 +19,13 @@ export class SummaryComponent implements OnInit, OnDestroy, SubscriptionCollecto
   constructor(private store: Store<AppState>, private categoriesService: CategoryService) {}
 
   collection: CategoryCollection;
-  categoryBeingCreated: CategoryModel;
+  category: CategoryModel;
 
   subscriptions: Subscription[] = [];
 
   ngOnInit() {
     this.subscriptions.push(this.store.select('category').subscribe(
-      categoryStore => {
-        this.collection = new CategoryCollection(categoryStore.list);
-        this.categoryBeingCreated = categoryStore.categoryBeingCreated;
-      }
+      ({list}) => this.collection = new CategoryCollection(list)
     ));
     this.categoriesService.get().then(
       categories => this.store.dispatch(new SetCategoriesAction(categories))
@@ -39,10 +34,13 @@ export class SummaryComponent implements OnInit, OnDestroy, SubscriptionCollecto
 
   ngOnDestroy() { this.subscriptions.forEach(subscription => subscription.unsubscribe()); }
 
-  saveCategory(category: CategoryModel) { this.store.dispatch(new SaveCategoryAction(category)); }
+  saveCategory(category: CategoryModel) {
+    this.category = null;
+    if (category.getName()) {
+      this.store.dispatch(new SaveCategoryAction(category));
+    }
+  }
 
-  updateCategory(name) { this.store.dispatch(new UpdateCategoryAction(name)); }
-
-  createCategory() { this.store.dispatch(new CreateCategoryAction()); }
+  createCategory() { this.category = new CategoryModel(); }
 
 }

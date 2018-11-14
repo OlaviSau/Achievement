@@ -5,6 +5,5 @@ export interface AppState {
 }
 
 export interface CategoryState {
-  categoryBeingCreated: CategoryModel;
   list: CategoryModel[];
 }

@@ -20,9 +20,7 @@ export class CategoryEffects {
       ofType(SAVE_CATEGORY),
       map(
         (action: SaveCategoryAction) =>  {
-          if (action.category.name) {
-            this.service.save(action.category);
-          }
+          this.service.save(action.category);
         }
       ),
       map( () => new class implements Action {
