@@ -25,7 +25,8 @@ export class CategoryComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.routeSubscription = this.route.params.subscribe(({key}) => {
+    this.routeSubscription = this.route.paramMap.subscribe((paramMap) => {
+          const key = paramMap.get('key')
           this.store.select('category').subscribe(
             categoryStore => this.category = categoryStore.list.find(category => category.getKey() === key)
           );
