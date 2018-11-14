@@ -16,7 +16,7 @@ import {SubscriptionCollector} from '../../subscription-collector';
 })
 export class SummaryComponent implements OnInit, OnDestroy, SubscriptionCollector {
 
-  constructor(private store: Store<AppState>, private categoriesService: CategoryService) {}
+  constructor(private store: Store<AppState>) {}
 
   collection: CategoryCollection;
   category: CategoryModel;
@@ -27,9 +27,6 @@ export class SummaryComponent implements OnInit, OnDestroy, SubscriptionCollecto
     this.subscriptions.push(this.store.select('category').subscribe(
       ({list}) => this.collection = new CategoryCollection(list)
     ));
-    this.categoriesService.get().then(
-      categories => this.store.dispatch(new SetCategoriesAction(categories))
-    );
   }
 
   ngOnDestroy() { this.subscriptions.forEach(subscription => subscription.unsubscribe()); }
