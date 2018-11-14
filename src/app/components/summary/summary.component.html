@@ -5,7 +5,14 @@
 
 <div class="categories">
   <div *ngFor="let category of categoryCollection | async" class="category" routerLink="/{{category.key}}">
-    <h2>{{category.name}}</h2>
+    <i  class="fa fa-edit" (click)="updateCategory(category)" adStopClickPropagation></i>
+    <h2
+            #name
+            (keyup)="categoryBeingUpdated.setName(name.textContent)"
+            (blur)="saveCategory(categoryBeingUpdated)"
+            adBlurOnEnter
+            [contentEditable]="categoryBeingUpdated === category"
+    >{{category.name}}</h2>
     <mat-progress-bar mode="determinate" [value]="category.completionPercent()"></mat-progress-bar>
   </div>
   <div class="category create" [class.creating]="categoryBeingCreated" (click)="createCategory()">
@@ -16,7 +23,7 @@
             (keyup)="categoryBeingCreated.setName(name.textContent)"
             (blur)="saveCategory(categoryBeingCreated)"
             adFocusOnInit adBlurOnEnter
-            contenteditable="true"
+            contentEditable
     ></h2>
     <mat-progress-bar *ngIf="categoryBeingCreated" mode="determinate" [value]="0"></mat-progress-bar>
   </div>

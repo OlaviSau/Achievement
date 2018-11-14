@@ -14,9 +14,11 @@ import {FocusOnInitDirective} from './directives/focus-on-init.directive';
 import {EffectsModule} from '@ngrx/effects';
 import {CategoryEffects} from './effects/category.effects';
 import {BlurOnEnterDirective} from './directives/blur-on-enter.directive';
+import {StopClickPropagationDirective} from './directives/stop-click-propagation.directive';
 
 @NgModule({
   declarations: [
+    StopClickPropagationDirective,
     BlurOnEnterDirective,
     FocusOnInitDirective,
     AppComponent,

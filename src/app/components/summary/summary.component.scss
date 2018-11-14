@@ -23,12 +23,22 @@ ad-summary {
       box-sizing: border-box;
       position: relative;
       height: 95px;
+      .fa.fa-edit {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 16px;
+        display: none;
+      }
 
       &:hover {
         background: rgba(0,0,0,.03);
         cursor: pointer;
         .fa.fa-plus {
           color: #784dc6;
+        }
+        .fa.fa-edit {
+          display: block;
         }
       }
 

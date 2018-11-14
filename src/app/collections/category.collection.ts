@@ -14,6 +14,10 @@ export class CategoryCollection implements Iterable<CategoryModel> {
     );
   }
 
+  has(category: CategoryModel) {
+    return Boolean(this.list.find(c => category.getKey() === c.getKey()));
+  }
+
   [Symbol.iterator](): Iterator<CategoryModel> {
     const collection = this;
     let pointer = 0;
