@@ -17,7 +17,8 @@ export class SummaryComponent implements OnInit {
   constructor(private store: Store<AppState>) {}
 
   categoryCollection: Observable<CategoryCollection>;
-  category: CategoryModel;
+  categoryBeingCreated: CategoryModel;
+  categoryBeingUpdated: CategoryModel;
 
   ngOnInit() {
     this.categoryCollection = this.store.select('category').pipe(
@@ -25,12 +26,13 @@ export class SummaryComponent implements OnInit {
     );
   }
 
-  saveCategory() {
-    if (this.category.getName()) {
-      this.store.dispatch(new SaveCategoryAction(this.category));
+  saveCategory(category: CategoryModel) {
+    if (category.getName()) {
+      this.store.dispatch(new SaveCategoryAction(category));
     }
-    this.category = null;
+    this.categoryBeingCreated = null;
+    this.categoryBeingUpdated = null;
   }
 
-  createCategory(category = new CategoryModel()) { this.category = category; }
+  createCategory() { this.categoryBeingCreated = new CategoryModel(); }
 }
