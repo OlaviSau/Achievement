@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {CategoryModel} from '../models/category.model';
 import {Store} from '@ngrx/store';
-import {AppState, CategoryState} from '../app.state';
+import {AppState} from '../app.state';
 import {CreateCategoryAction} from '../actions/create-category.action';
 import {UpdateCategoryAction} from '../actions/update-category.action';
 import {SaveCategoryAction} from '../actions/save-category.action';
@@ -23,7 +23,7 @@ export class SummaryComponent implements OnInit, OnDestroy, SubscriptionCollecto
   collection: CategoryCollection;
   categoryBeingCreated: CategoryModel;
 
-  subscriptions: Subscription[];
+  subscriptions: Subscription[] = [];
 
   ngOnInit() {
     this.subscriptions.push(this.store.select('category').subscribe(
