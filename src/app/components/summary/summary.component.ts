@@ -15,7 +15,7 @@ import {map} from 'rxjs/operators';
   templateUrl: './summary.component.html',
   styleUrls: ['./summary.component.scss']
 })
-export class SummaryComponent implements OnInit{
+export class SummaryComponent implements OnInit {
 
   constructor(private store: Store<AppState>) {}
 
