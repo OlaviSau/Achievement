@@ -17,6 +17,9 @@ export class SummaryComponent implements OnInit {
   constructor(private store: Store<AppState>) {}
 
   categoryCollection: Observable<CategoryCollection>;
+  // I decided to keep 2 different properties because
+  // 1) There is no way to differentiate between a new and a existing category
+  // 2) There are no good names for the category being worked on - considered active, current, <no prefix>, BeingWorkedOn
   categoryBeingCreated: CategoryModel;
   categoryBeingUpdated: CategoryModel;
 
@@ -35,4 +38,6 @@ export class SummaryComponent implements OnInit {
   }
 
   createCategory() { this.categoryBeingCreated = new CategoryModel(); }
+
+  updateCategory(category) { this.categoryBeingUpdated = category; }
 }
