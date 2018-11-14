@@ -1,13 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CategoryModel} from '../../models/category.model';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../app.state';
 import {SaveCategoryAction} from '../../actions/save-category.action';
 import {CategoryCollection} from '../../collections/category.collection';
-import {Observable, Subscription} from 'rxjs';
-import {CategoryService} from '../../services/category.service';
-import {SetCategoriesAction} from '../../actions/set-categories.action';
-import {SubscriptionCollector} from '../../subscription-collector';
+import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 
 @Component({
@@ -19,11 +16,11 @@ export class SummaryComponent implements OnInit {
 
   constructor(private store: Store<AppState>) {}
 
-  collection: Observable<CategoryCollection>;
+  categoryCollection: Observable<CategoryCollection>;
   category: CategoryModel;
 
   ngOnInit() {
-    this.collection = this.store.select('category').pipe(
+    this.categoryCollection = this.store.select('category').pipe(
       map(({list}) => new CategoryCollection(list))
     );
   }
@@ -35,5 +32,5 @@ export class SummaryComponent implements OnInit {
     this.category = null;
   }
 
-  createCategory() { this.category = new CategoryModel(); }
+  createCategory(category = new CategoryModel()) { this.category = category; }
 }
