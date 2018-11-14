@@ -11,7 +11,7 @@
   <div class="category create" [class.creating]="categoryBeingCreated" (click)="createCategory()">
     <i  class="fa fa-plus"></i>
     <h2
-            *ngIf="category"
+            *ngIf="categoryBeingCreated"
             #name
             (keyup)="categoryBeingCreated.setName(name.textContent)"
             (blur)="saveCategory(categoryBeingCreated)"
