@@ -14,17 +14,17 @@ export class CategoryService {
   get(key: string): Promise<CategoryModel>;
   get(key?: string) {
     if (!key) {
-      return this.http.get<CategoryModel[]>('http://api.achievement.ee:8080/category').pipe(
+      return this.http.get<{name, achievements: []}[]>('http://api.achievement.ee:8080/category').pipe(
         map(categories => categories.map( category => new CategoryModel(category)))
       ).toPromise();
     }
-    return this.http.get<CategoryModel>(`http://api.achievement.ee:8080/category/${key}`).pipe(
+    return this.http.get<{name, achievements: []}>(`http://api.achievement.ee:8080/category/${key}`).pipe(
       map( category => new CategoryModel(category))
     ).toPromise();
   }
 
   save(category: CategoryModel) {
-    return this.http.put(`http://api.achievement.ee:8080/category/${category.key}`, category).subscribe();
+    return this.http.put(`http://api.achievement.ee:8080/category/${category.getKey()}`, category).subscribe();
   }
 
 }

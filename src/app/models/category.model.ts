@@ -13,6 +13,7 @@ export class CategoryModel {
   private name: string;
   achievements: AchievementModel[];
 
+  public getKey() { return this.key; }
   public getName() { return this.name; }
 
   public setName(name: string) {
