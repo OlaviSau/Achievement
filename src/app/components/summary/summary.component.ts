@@ -1,13 +1,13 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {CategoryModel} from '../models/category.model';
+import {CategoryModel} from '../../models/category.model';
 import {Store} from '@ngrx/store';
-import {AppState} from '../app.state';
-import {SaveCategoryAction} from '../actions/save-category.action';
-import {CategoryCollection} from '../collections/category.collection';
+import {AppState} from '../../app.state';
+import {SaveCategoryAction} from '../../actions/save-category.action';
+import {CategoryCollection} from '../../collections/category.collection';
 import {Subscription} from 'rxjs';
-import {CategoryService} from '../services/category.service';
-import {SetCategoriesAction} from '../actions/set-categories.action';
-import {SubscriptionCollector} from '../subscription-collector';
+import {CategoryService} from '../../services/category.service';
+import {SetCategoriesAction} from '../../actions/set-categories.action';
+import {SubscriptionCollector} from '../../subscription-collector';
 
 @Component({
   selector: 'ad-summary',

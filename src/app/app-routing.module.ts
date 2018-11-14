@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {SummaryComponent} from './summary/summary.component';
-import {CategoryComponent} from './category/category.component';
+import {SummaryComponent} from './components/summary/summary.component';
+import {CategoryComponent} from './components/category/category.component';
 
 const routes: Routes = [
   { path: '', component: SummaryComponent },

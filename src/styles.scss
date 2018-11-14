@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "app/app.component";
-@import "app/summary/summary.component";
-@import "app/category/category.component";
+@import "app/components/summary/summary.component";
+@import "app/components/category/category.component";
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 body {
