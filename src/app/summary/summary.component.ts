@@ -34,13 +34,12 @@ export class SummaryComponent implements OnInit, OnDestroy, SubscriptionCollecto
 
   ngOnDestroy() { this.subscriptions.forEach(subscription => subscription.unsubscribe()); }
 
-  saveCategory(category: CategoryModel) {
-    this.category = null;
-    if (category.getName()) {
-      this.store.dispatch(new SaveCategoryAction(category));
+  saveCategory() {
+    if (this.category.getName()) {
+      this.store.dispatch(new SaveCategoryAction(this.category));
     }
+    this.category = null;
   }
 
   createCategory() { this.category = new CategoryModel(); }
-
 }
