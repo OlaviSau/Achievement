@@ -7,7 +7,9 @@
   <div *ngFor="let achievement of sortByCompletion(category.achievements)" class="achievement" [class.completed]="achievement.completed">
     <img class="achievement-image" src="assets/images/achievements/{{achievement.img}}" alt="achievement-image">
     <h2 class="achievement-title">{{achievement.title}}</h2>
-    <p class="achievement-description">{{achievement.description}}</p>
+    <ul class="achievement-description">
+      <li class="task-description" [class.completed]="task.completed" *ngFor="let task of achievement.tasks">{{task.description}}</li>
+    </ul>
     <div class="achievement-points">{{achievement.points}}</div>
   </div>
 </div>

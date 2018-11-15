@@ -3,6 +3,10 @@ export interface AchievementModel {
   title: string;
   points: number;
   completed: boolean;
-  description: string;
+  tasks: {
+    id: number,
+    description: string,
+    completed: boolean
+  }[];
   img: string;
 }

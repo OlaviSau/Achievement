@@ -18,12 +18,16 @@ ad-category {
     .achievement {
       padding: 25px;
       text-align: left;
-      height: 140px;
+      min-height: 140px;
       box-sizing: border-box;
       position: relative;
 
       color: rgba(0,0,0,.5);
+
       &.completed {
+        color: #673ab7;
+      }
+      .task-description.completed {
         color: #673ab7;
       }
 
@@ -50,7 +54,6 @@ ad-category {
         background: rgba(0,0,0,.03);
       }
     }
-
   }
 
 
