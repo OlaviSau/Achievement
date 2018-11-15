@@ -36,6 +36,12 @@ ad-category {
         width: 160px;
         float: left;
         margin-right: 25px;
+        > img {
+          max-width: 160px;
+          max-height: 90px;
+          margin: 0 auto;
+          display: block;
+        }
       }
       .achievement-title {
         display: inline-block;
