@@ -25,7 +25,11 @@ export class CategoryModel {
   }
 
   public setAchievements(achievements = []) {
-    this.achievements = achievements;
+    this.achievements = this.sortByCompletion(achievements);
+  }
+
+  private sortByCompletion(achievements: AchievementModel[]) {
+    return achievements.sort((l: AchievementModel, r: AchievementModel) => l.completed ? -1 : 1 );
   }
 
   completionPercent() {

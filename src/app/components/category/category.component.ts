@@ -20,10 +20,6 @@ export class CategoryComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<AppState>, private route: ActivatedRoute, private categoryService: CategoryService) {}
 
-  sortByCompletion(achievements: AchievementModel[]) {
-    return achievements.sort((l: AchievementModel, r: AchievementModel) => l.completed ? -1 : 1 );
-  }
-
   ngOnInit() {
     this.routeSubscription = this.route.paramMap.subscribe((paramMap) => {
           const key = paramMap.get('key')

@@ -4,7 +4,7 @@
 </div>
 
 <div *ngIf="category" class="achievements">
-  <div *ngFor="let achievement of sortByCompletion(category.achievements)" class="achievement" [class.completed]="achievement.completed">
+  <div *ngFor="let achievement of category.achievements" class="achievement" [class.completed]="achievement.completed">
     <div class="achievement-image">
       <img src="assets/images/achievements/{{achievement.img}}" alt="achievement-image">
     </div>
