@@ -26,6 +26,10 @@ ad-category {
 
       &.completed {
         color: #673ab7;
+        .achievement-points {
+          top: calc(50% - 62.5px);
+          background-image: url(/assets/images/laurel.svg);
+        }
       }
       .task-description.completed {
         color: #673ab7;
@@ -49,10 +53,14 @@ ad-category {
       }
 
       .achievement-points {
-        top: calc(50% - 31.5px);
-        right: 25px;
+        top: calc(50% - 42.5px);
+        padding: 20px;
+        background-size: 80px 80px;
+        right: 15px;
         position: absolute;
         font-size: 50px;
+        background-position: bottom;
+        background-repeat: no-repeat;
 
       }
 
