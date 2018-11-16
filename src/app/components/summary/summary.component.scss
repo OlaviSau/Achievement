@@ -23,28 +23,47 @@ ad-summary {
       box-sizing: border-box;
       position: relative;
       height: 95px;
-      .fa.fa-edit {
+
+      .fa.fa-pencil-alt, .fa.fa-trash {
         position: absolute;
-        top: 15px;
-        right: 15px;
-        font-size: 16px;
+        top: 5px;
         display: none;
+        padding: 5px;
+        font-size: 16px;
+      }
+      .fa.fa-pencil-alt {
+        right: 30px;
+      }
+
+      .fa.fa-trash {
+        right: 5px;
       }
 
       &:hover {
         background: rgba(0,0,0,.03);
         cursor: pointer;
-        .fa.fa-plus {
-          color: #784dc6;
-        }
-        .fa.fa-edit {
+        .fa.fa-pencil-alt{
           display: block;
         }
+        .fa.fa-trash {
+          display: block;
+        }
+      }
+      .fa.fa-pencil-alt:hover, .fa.fa-trash:hover {
+        color: white;
+        background-color: #673ab7;
+        border-radius: 50%;
       }
 
       h2::selection {
         color: #ffffff;
         background-color: #673ab7;
+      }
+
+      &.updating {
+        .fa.fa-edit {
+          display: none;
+        }
       }
 
       &.creating {

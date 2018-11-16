@@ -6,10 +6,11 @@
 <div class="categories">
   <div
           *ngFor="let category of categoryCollection | async"
-          class="category"
+          class="category" [class.updating]="updating(category)"
           [routerLink]="updating(category) ? null : '/' + category.key"
   >
-    <i  class="fa fa-edit" (click)="updateCategory(category); focus(name)"></i>
+    <i  class="fa fa-pencil-alt"  (click)="updateCategory(category); focus(name)"></i>
+    <i  class="fa fa-trash" (click)="deleteCategory(category); focus(name)"></i>
     <h2
             [textContent]="category.getName()"
             #name

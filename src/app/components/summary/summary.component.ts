@@ -32,6 +32,7 @@ export class SummaryComponent implements OnInit {
     this.categoryInFocus = null;
   }
 
+  deleteCategory(category) {  }
   updateCategory(category) { this.categoryInFocus = category; }
   createCategory() { this.categoryInFocus = new CategoryModel(); } // semantics
   creating() { return this.categoryInFocus && !this.categoryInFocus.getId(); }
