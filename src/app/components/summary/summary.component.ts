@@ -38,9 +38,8 @@ export class SummaryComponent implements OnInit {
   createCategory() { this.categoryInFocus = new CategoryModel(); } // semantics
   creating() { return this.categoryInFocus && !this.categoryInFocus.getId(); }
   updating(category) { return this.categoryInFocus === category; }
-  focus(el: HTMLElement) {
+  select(el: HTMLElement) {
     setTimeout(() => {
-      el.focus();
       const selection = window.getSelection();
       const range = document.createRange();
       range.selectNodeContents(el);

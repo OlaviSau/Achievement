@@ -1,6 +1,6 @@
 <div>
   <h1>TOTAL</h1>
-  <mat-progress-bar mode="determinate" [value]="(categoryCollection | async).completionPercent()" class="total-progress-bar"></mat-progress-bar>
+  <mat-progress-bar [value]="(categoryCollection | async).completionPercent()" class="total-progress-bar"></mat-progress-bar>
 </div>
 
 <div class="categories">
@@ -9,7 +9,7 @@
           class="category" [class.updating]="updating(category)"
           [routerLink]="updating(category) ? null : '/' + category.key"
   >
-    <i  class="fa fa-pencil-alt"  (click)="updateCategory(category); focus(name);" adStopClickPropagation></i>
+    <i  class="fa fa-pencil-alt"  (click)="updateCategory(category); select(name);" adStopClickPropagation></i>
     <i  class="fa fa-trash" (click)="deleteCategory(category)" adStopClickPropagation></i>
     <h2
             [textContent]="category.getName()"
@@ -24,17 +24,17 @@
   <div
           class="category create" [class.creating]="creating()"
           (click)="createCategory();"
-          (focusout)="saveCategory(categoryInFocus)"
   >
     <i class="fa fa-plus"></i>
     <h2
             *ngIf="creating()"
             #name
             (keyup)="categoryInFocus.setName(name.textContent)"
+            (blur)="saveCategory(categoryInFocus)"
             adFocusOnInit adBlurOnEnter
             contentEditable
     ></h2>
-    <mat-progress-bar *ngIf="creating()" mode="determinate" [value]="0"></mat-progress-bar>
+    <mat-progress-bar *ngIf="creating()" [value]="0"></mat-progress-bar>
   </div>
 </div>
 
