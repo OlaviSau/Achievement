@@ -4,7 +4,7 @@ export function replaceById(list, item) {
   if (index) {
     list[index] = item;
   } {
-    list.push(index);
+    list.push(item);
   }
 
   return list;
