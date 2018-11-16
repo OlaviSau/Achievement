@@ -18,7 +18,7 @@ export class SummaryComponent implements OnInit {
   constructor(private store: Store<AppState>) {}
 
   categoryCollection: Observable<CategoryCollection>;
-  categoryInFocus: CategoryModel;
+  activeCategory: CategoryModel;
 
   ngOnInit() {
     this.categoryCollection = this.store.select('category').pipe(
@@ -30,14 +30,14 @@ export class SummaryComponent implements OnInit {
     if (category.getName()) {
       this.store.dispatch(new SaveCategoryAction(category));
     }
-    this.categoryInFocus = null;
+    this.activeCategory = null;
   }
 
   deleteCategory(category) { this.store.dispatch(new DeleteCategoryAction(category)); }
-  updateCategory(category) { this.categoryInFocus = category; }
-  createCategory() { this.categoryInFocus = new CategoryModel(); } // semantics
-  creating() { return this.categoryInFocus && !this.categoryInFocus.getId(); }
-  updating(category) { return this.categoryInFocus === category; }
+  updateCategory(category) { this.activeCategory = category; }
+  createCategory() { this.activeCategory = new CategoryModel(); } // semantics
+  creating() { return this.activeCategory && !this.activeCategory.getId(); }
+  updating(category) { return this.activeCategory === category; }
   select(el: HTMLElement) {
     setTimeout(() => {
       const selection = window.getSelection();

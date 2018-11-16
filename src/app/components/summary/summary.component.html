@@ -29,8 +29,8 @@
     <h2
             *ngIf="creating()"
             #name
-            (keyup)="categoryInFocus.setName(name.textContent)"
-            (blur)="saveCategory(categoryInFocus)"
+            (keyup)="activeCategory.setName(name.textContent)"
+            (blur)="saveCategory(activeCategory)"
             adFocusOnInit adBlurOnEnter
             contentEditable
     ></h2>
