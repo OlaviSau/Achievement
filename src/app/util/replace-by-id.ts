@@ -3,7 +3,7 @@ export function replaceById(list, item) {
   const index = list.findIndex(i => i.id === item.id);
   if (index) {
     list[index] = item;
-  } {
+  } else {
     list.push(item);
   }
 
