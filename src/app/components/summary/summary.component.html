@@ -4,29 +4,36 @@
 </div>
 
 <div class="categories">
-  <div *ngFor="let category of categoryCollection | async" class="category" routerLink="/{{category.key}}">
-    <i  class="fa fa-edit" (click)="updateCategory(category); name.focus()" adStopClickPropagation></i>
+  <div
+          *ngFor="let category of categoryCollection | async"
+          class="category"
+          [routerLink]="updating(category) ? null : '/' + category.key"
+  >
+    <i  class="fa fa-edit" (click)="updateCategory(category); focus(name)"></i>
     <h2
             [textContent]="category.getName()"
             #name
-            (keyup)="categoryInFocus.setName(name.textContent)"
-            (blur)="saveCategory(categoryInFocus)"
+            (keyup)="category.setName(name.textContent)"
+            (blur)="saveCategory(category)"
             adBlurOnEnter
-            contentEditable
+            [contentEditable]="updating(category)"
     ></h2>
     <mat-progress-bar mode="determinate" [value]="category.completionPercent()"></mat-progress-bar>
   </div>
-  <div class="category create" [class.creating]="categoryInFocus?.id === undefined" (click)="updateCategory()">
-    <i  class="fa fa-plus"></i>
+  <div
+          class="category create" [class.creating]="creating()"
+          (click)="createCategory();"
+          (focusout)="saveCategory(categoryInFocus)"
+  >
+    <i class="fa fa-plus"></i>
     <h2
-            *ngIf="categoryInFocus?.id === undefined"
+            *ngIf="creating()"
             #name
             (keyup)="categoryInFocus.setName(name.textContent)"
-            (blur)="saveCategory(categoryInFocus)"
             adFocusOnInit adBlurOnEnter
             contentEditable
     ></h2>
-    <mat-progress-bar *ngIf="categoryInFocus?.id === undefined" mode="determinate" [value]="0"></mat-progress-bar>
+    <mat-progress-bar *ngIf="creating()" mode="determinate" [value]="0"></mat-progress-bar>
   </div>
 </div>
 

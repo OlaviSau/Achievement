@@ -32,5 +32,18 @@ export class SummaryComponent implements OnInit {
     this.categoryInFocus = null;
   }
 
-  updateCategory(category = new CategoryModel()) { this.categoryInFocus = category; }
+  updateCategory(category) { this.categoryInFocus = category; }
+  createCategory() { this.categoryInFocus = new CategoryModel(); } // semantics
+  creating() { return this.categoryInFocus && !this.categoryInFocus.getId(); }
+  updating(category) { return this.categoryInFocus === category; }
+  focus(el: HTMLElement) {
+    setTimeout(() => {
+      el.focus();
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    });
+  }
 }

@@ -5,6 +5,7 @@ import {SAVE_CATEGORY, SaveCategoryAction} from '../actions/save-category.action
 import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Action} from '@ngrx/store';
+import {SetCategoryAction} from '../actions/set-category.action';
 
 @Injectable()
 export class CategoryEffects {
@@ -21,11 +22,10 @@ export class CategoryEffects {
       map(
         (action: SaveCategoryAction) =>  {
           this.service.save(action.category);
+          return action.category;
         }
       ),
-      map( () => new class implements Action {
-        type = 'CATEGORY_SAVED';
-      })
+      map( category  => new SetCategoryAction(category) )
     );
   }
 }
