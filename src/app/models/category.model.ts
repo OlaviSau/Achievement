@@ -19,6 +19,9 @@ export class CategoryModel {
   public getKey() { return this.key; }
   public getName() { return this.name; }
 
+  public setId(id: number) {
+    this.id = id;
+  }
   public setName(name: string) {
     this.name = name;
     this.key = dashify(name);

@@ -9,8 +9,8 @@
           class="category" [class.updating]="updating(category)"
           [routerLink]="updating(category) ? null : '/' + category.key"
   >
-    <i  class="fa fa-pencil-alt"  (click)="updateCategory(category); focus(name)"></i>
-    <i  class="fa fa-trash" (click)="deleteCategory(category); focus(name)"></i>
+    <i  class="fa fa-pencil-alt"  (click)="updateCategory(category); focus(name);" adStopClickPropagation></i>
+    <i  class="fa fa-trash" (click)="deleteCategory(category)" adStopClickPropagation></i>
     <h2
             [textContent]="category.getName()"
             #name

@@ -6,6 +6,7 @@ import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {Action} from '@ngrx/store';
 import {SetCategoryAction} from '../actions/set-category.action';
+import {DELETE_CATEGORY, DeleteCategoryAction} from '../actions/delete-category.action';
 
 @Injectable()
 export class CategoryEffects {
@@ -26,6 +27,22 @@ export class CategoryEffects {
         }
       ),
       map( category  => new SetCategoryAction(category) )
+    );
+  }
+
+  @Effect()
+  delete(): Observable<Action> {
+    return this.actions.pipe(
+      ofType(DELETE_CATEGORY),
+      map(
+        (action: DeleteCategoryAction) =>  {
+          this.service.delete(action.category);
+          return action.category;
+        }
+      ),
+      map( category  => new class implements Action {
+        type = 'NULL';
+      } )
     );
   }
 }

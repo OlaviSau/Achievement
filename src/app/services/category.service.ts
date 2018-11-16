@@ -24,7 +24,10 @@ export class CategoryService {
   }
 
   save(category: CategoryModel) {
-    return this.http.put(`http://api.achievement.ee:8080/category`, category).subscribe();
+    return this.http.put<number>(`http://api.achievement.ee:8080/category`, category).subscribe( id => category.setId(id));
   }
 
+  delete(category: CategoryModel) {
+    return this.http.delete(`http://api.achievement.ee:8080/category/${category.getKey()}`).subscribe();
+  }
 }

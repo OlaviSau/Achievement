@@ -6,6 +6,7 @@ import {SaveCategoryAction} from '../../actions/save-category.action';
 import {CategoryCollection} from '../../collections/category.collection';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {DeleteCategoryAction} from '../../actions/delete-category.action';
 
 @Component({
   selector: 'ad-summary',
@@ -32,7 +33,7 @@ export class SummaryComponent implements OnInit {
     this.categoryInFocus = null;
   }
 
-  deleteCategory(category) {  }
+  deleteCategory(category) { this.store.dispatch(new DeleteCategoryAction(category)); }
   updateCategory(category) { this.categoryInFocus = category; }
   createCategory() { this.categoryInFocus = new CategoryModel(); } // semantics
   creating() { return this.categoryInFocus && !this.categoryInFocus.getId(); }
