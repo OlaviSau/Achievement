@@ -5,14 +5,13 @@
 
 <div class="categories">
   <div *ngFor="let category of categoryCollection | async" class="category" routerLink="/{{category.key}}">
-    <i  class="fa fa-edit" (click)="updateCategory(category)" adStopClickPropagation></i>
-    <h2 *ngIf="categoryInFocus !== category">{{category.name}}</h2>
+    <i  class="fa fa-edit" (click)="updateCategory(category); name.focus()" adStopClickPropagation></i>
     <h2
-            *ngIf="categoryInFocus === category"
+            [textContent]="category.getName()"
             #name
             (keyup)="categoryInFocus.setName(name.textContent)"
             (blur)="saveCategory(categoryInFocus)"
-            adFocusOnInit adBlurOnEnter
+            adBlurOnEnter
             contentEditable
     ></h2>
     <mat-progress-bar mode="determinate" [value]="category.completionPercent()"></mat-progress-bar>
