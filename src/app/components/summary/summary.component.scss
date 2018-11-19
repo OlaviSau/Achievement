@@ -26,19 +26,20 @@ ad-summary {
       position: relative;
       height: 95px;
 
-      .fa.fa-pencil-alt, .fa.fa-trash {
-        position: absolute;
-        top: 5px;
-        display: none;
-        padding: 5px;
-        font-size: 16px;
-      }
-      .fa.fa-pencil-alt {
-        right: 30px;
-      }
-
-      .fa.fa-trash {
-        right: 5px;
+      .fa.fa- {
+        &pencil-alt, &trash {
+          position: absolute;
+          top: 5px;
+          display: none;
+          padding: 5px;
+          font-size: 16px;
+        }
+        &pencil-alt {
+          right: 30px;
+        }
+        &trash {
+          right: 5px;
+        }
       }
 
       &:hover {
