@@ -19,11 +19,11 @@ export class SummaryComponent implements OnInit {
 
   constructor(private store: Store<AppState>, private dialog: MatDialog) {}
 
-  categoryCollection: Observable<CategoryCollection>;
+  categoryCollection$: Observable<CategoryCollection>;
   activeCategory: CategoryModel;
 
   ngOnInit() {
-    this.categoryCollection = this.store.select('category').pipe(
+    this.categoryCollection$ = this.store.select('category').pipe(
       map(({list}) => new CategoryCollection(list))
     );
   }

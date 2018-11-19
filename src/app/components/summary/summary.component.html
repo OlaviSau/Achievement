@@ -1,11 +1,11 @@
 <div>
   <h1>TOTAL</h1>
-  <mat-progress-bar [value]="(categoryCollection | async).completionPercent()" class="total-progress-bar"></mat-progress-bar>
+  <mat-progress-bar [value]="(categoryCollection$ | async).completionPercent()" class="total-progress-bar"></mat-progress-bar>
 </div>
 
 <div class="categories">
   <div
-          *ngFor="let category of categoryCollection | async"
+          *ngFor="let category of categoryCollection$ | async"
           class="category" [class.updating]="updating(category)"
           [routerLink]="updating(category) ? null : '/' + category.key"
   >
