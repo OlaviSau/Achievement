@@ -1,11 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {AppState} from '../../app.state';
 import {Store} from '@ngrx/store';
 import {CategoryModel} from '../../models/category.model';
 import {CategoryService} from '../../services/category.service';
 import {SetCategoryAction} from '../../actions/set-category.action';
-import {Observable, Subscription} from 'rxjs';
+import {Observable} from 'rxjs';
 import {map, switchMap, tap} from 'rxjs/operators';
 
 @Component({
