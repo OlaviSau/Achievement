@@ -24,6 +24,7 @@ import {BlurOnEnterDirective} from './directives/blur-on-enter.directive';
 import {StopClickPropagationDirective} from './directives/stop-click-propagation.directive';
 import {ConfirmDialogComponent} from './components/dialogs/confirm.dialog';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {SelectOnClickDirective} from './directives/select-on-click.directive';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     StopClickPropagationDirective,
     BlurOnEnterDirective,
     FocusOnInitDirective,
+    SelectOnClickDirective,
     AppComponent,
     SummaryComponent,
     CategoryComponent

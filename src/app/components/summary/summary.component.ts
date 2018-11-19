@@ -40,17 +40,9 @@ export class SummaryComponent implements OnInit {
       result => result ? this.store.dispatch(new DeleteCategoryAction(category)) : null
     );
   }
+
   updateCategory(category) { this.activeCategory = category; }
   createCategory() { this.activeCategory = new CategoryModel(); } // semantics
   creating() { return this.activeCategory && !this.activeCategory.getId(); }
   updating(category) { return this.activeCategory === category; }
-  select(el: HTMLElement) {
-    setTimeout(() => {
-      const selection = window.getSelection();
-      const range = document.createRange();
-      range.selectNodeContents(el);
-      selection.removeAllRanges();
-      selection.addRange(range);
-    });
-  }
 }
