@@ -19,9 +19,10 @@ ad-summary {
     flex-wrap: wrap;
 
     .category {
-      flex-basis: 25%;
+      flex-basis: calc(25% - 20px);
       min-width: 240px;
       padding: 0 20px 20px 20px;
+      margin: 10px;
       box-sizing: border-box;
       position: relative;
       height: 95px;

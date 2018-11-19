@@ -6,7 +6,7 @@
 <div class="categories">
   <div
           *ngFor="let category of categoryCollection$ | async"
-          class="category" [class.updating]="updating(category)"
+          class="category mat-elevation-z1" [class.updating]="updating(category)"
           [routerLink]="updating(category) ? null : '/' + category.key"
   >
     <i  class="fa fa-pencil-alt"  (click)="updateCategory(category)" adStopClickPropagation [adSelectOnClick]="name"></i>
@@ -22,7 +22,7 @@
     <mat-progress-bar mode="determinate" [value]="category.completionPercent()"></mat-progress-bar>
   </div>
   <div
-          class="category create" [class.creating]="creating()"
+          class="category mat-elevation-z1 create" [class.creating]="creating()"
           (click)="createCategory();"
   >
     <i class="fa fa-plus"></i>
