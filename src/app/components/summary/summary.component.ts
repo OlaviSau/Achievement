@@ -7,6 +7,8 @@ import {CategoryCollection} from '../../collections/category.collection';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {DeleteCategoryAction} from '../../actions/delete-category.action';
+import {MatDialog, MatDialogRef} from '@angular/material';
+import {ConfirmDialogComponent} from '../dialogs/confirm.dialog';
 
 @Component({
   selector: 'ad-summary',
@@ -15,7 +17,7 @@ import {DeleteCategoryAction} from '../../actions/delete-category.action';
 })
 export class SummaryComponent implements OnInit {
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>, private dialog: MatDialog) {}
 
   categoryCollection: Observable<CategoryCollection>;
   activeCategory: CategoryModel;
@@ -33,7 +35,11 @@ export class SummaryComponent implements OnInit {
     this.activeCategory = null;
   }
 
-  deleteCategory(category) { this.store.dispatch(new DeleteCategoryAction(category)); }
+  deleteCategory(category) {
+    this.dialog.open(ConfirmDialogComponent).afterClosed().subscribe(
+      result => result ? this.store.dispatch(new DeleteCategoryAction(category)) : null
+    );
+  }
   updateCategory(category) { this.activeCategory = category; }
   createCategory() { this.activeCategory = new CategoryModel(); } // semantics
   creating() { return this.activeCategory && !this.activeCategory.getId(); }

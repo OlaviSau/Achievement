@@ -5,7 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SummaryComponent } from './components/summary/summary.component';
 import { CategoryComponent } from './components/category/category.component';
-import { MatProgressBarModule} from '@angular/material';
+import {
+  MAT_DIALOG_DEFAULT_OPTIONS, MatButtonModule,
+  MatDialog,
+  MatDialogActions,
+  MatDialogContent,
+  MatDialogModule,
+  MatProgressBarModule
+} from '@angular/material';
 import {StoreModule} from '@ngrx/store';
 import {categoryReducer} from './reducers/category.reducer';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -15,9 +22,12 @@ import {EffectsModule} from '@ngrx/effects';
 import {CategoryEffects} from './effects/category.effects';
 import {BlurOnEnterDirective} from './directives/blur-on-enter.directive';
 import {StopClickPropagationDirective} from './directives/stop-click-propagation.directive';
+import {ConfirmDialogComponent} from './components/dialogs/confirm.dialog';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
+    ConfirmDialogComponent,
     StopClickPropagationDirective,
     BlurOnEnterDirective,
     FocusOnInitDirective,
@@ -27,20 +37,25 @@ import {StopClickPropagationDirective} from './directives/stop-click-propagation
   ],
   imports: [
     HttpClientModule,
-    BrowserModule,
     AppRoutingModule,
     MatProgressBarModule,
+    MatDialogModule,
+    MatButtonModule,
     StoreModule.forRoot({
       category: categoryReducer
     }),
-    EffectsModule.forRoot([CategoryEffects])
+    EffectsModule.forRoot([CategoryEffects]),
+    BrowserModule,
+    BrowserAnimationsModule,
   ],
+  entryComponents: [ConfirmDialogComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: CachingInterceptor,
       multi: true
-    }
+    },
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ],
   bootstrap: [AppComponent]
 })
