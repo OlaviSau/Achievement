@@ -1,10 +1,10 @@
-<div *ngIf="category">
-  <h1 class="category-name">{{category.name}}</h1>
-  <mat-progress-bar mode="determinate" [value]="category.completionPercent()" class="total-progress-bar"></mat-progress-bar>
+<div *ngIf="(category$ | async)">
+  <h1 class="(category$ | async)-name">{{(category$ | async).name}}</h1>
+  <mat-progress-bar mode="determinate" [value]="(category$ | async).completionPercent()" class="total-progress-bar"></mat-progress-bar>
 </div>
 
-<div *ngIf="category" class="achievements">
-  <div *ngFor="let achievement of category.achievements" class="achievement" [class.completed]="achievement.completed">
+<div *ngIf="(category$ | async)" class="achievements">
+  <div *ngFor="let achievement of (category$ | async).achievements" class="achievement" [class.completed]="achievement.completed">
     <div class="achievement-image">
       <img src="assets/images/achievements/{{achievement.img}}" alt="achievement-image">
     </div>
