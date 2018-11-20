@@ -34,6 +34,7 @@ ad-summary {
           display: none;
           padding: 5px;
           font-size: 16px;
+          border-radius: 50%;
         }
         &pencil-alt {
           right: 30px;
@@ -56,7 +57,6 @@ ad-summary {
       .fa.fa-pencil-alt:hover, .fa.fa-trash:hover {
         color: white;
         background-color: #673ab7;
-        border-radius: 50%;
       }
 
       h2::selection {
@@ -65,7 +65,12 @@ ad-summary {
       }
 
       &.updating {
-        .fa.fa-edit {
+        .fa.fa-pencil-alt {
+          display: block;
+          color: white;
+          background-color: #673ab7;
+        }
+        .fa.fa-trash {
           display: none;
         }
       }

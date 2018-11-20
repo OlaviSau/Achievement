@@ -11,7 +11,7 @@ import {
   MatDialogActions,
   MatDialogContent,
   MatDialogModule,
-  MatProgressBarModule
+  MatProgressBarModule, MatTooltipModule
 } from '@angular/material';
 import {StoreModule} from '@ngrx/store';
 import {categoryReducer} from './reducers/category.reducer';
@@ -25,6 +25,7 @@ import {StopClickPropagationDirective} from './directives/stop-click-propagation
 import {ConfirmDialogComponent} from './components/dialogs/confirm.dialog';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SelectOnClickDirective} from './directives/select-on-click.directive';
+import {DisableClickDirective} from './directives/disable-click.directive';
 
 @NgModule({
   declarations: [
@@ -35,12 +36,14 @@ import {SelectOnClickDirective} from './directives/select-on-click.directive';
     SelectOnClickDirective,
     AppComponent,
     SummaryComponent,
-    CategoryComponent
+    CategoryComponent,
+    DisableClickDirective
   ],
   imports: [
     HttpClientModule,
     AppRoutingModule,
     MatProgressBarModule,
+    MatTooltipModule,
     MatDialogModule,
     MatButtonModule,
     StoreModule.forRoot({

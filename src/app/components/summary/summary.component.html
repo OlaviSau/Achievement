@@ -8,14 +8,26 @@
           *ngFor="let category of categoryCollection$ | async"
           class="category mat-elevation-z1" [class.updating]="updating(category)"
           [routerLink]="updating(category) ? null : '/' + category.key"
+          [adDisableClick]="updating(category)"
   >
-    <i  class="fa fa-pencil-alt"  (click)="updateCategory(category)" adStopClickPropagation [adSelectOnClick]="name"></i>
-    <i  class="fa fa-trash" (click)="deleteCategory(category)" adStopClickPropagation></i>
+    <i class="fa fa-pencil-alt"
+       (click)="updateCategory(category)"
+       adStopClickPropagation
+       matTooltip="Change category name"
+       matTooltipPosition="above"
+       [adSelectOnClick]="name"
+    ></i>
+    <i class="fa fa-trash"
+       (click)="deleteCategory(category)"
+       adStopClickPropagation
+       matTooltip="Delete category"
+       matTooltipPosition="above"
+    ></i>
     <h2
             [textContent]="category.getName()"
             #name
             (keyup)="category.setName(name.textContent)"
-            (blur)="saveCategory(category)"
+            (blur)="saveCategory(category);"
             adBlurOnEnter
             [contentEditable]="updating(category)"
     ></h2>
